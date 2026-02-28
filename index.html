@@ -511,7 +511,7 @@ function buildK(d){
       <div class="ks"><div class="ks-l">Range</div><div class="ks-v">${d.kelvin.label}</div></div>
       <div class="ks"><div class="ks-l">Illuminance</div><div class="ks-v">${d.lux}</div></div>
       <div class="ks"><div class="ks-l">CRI</div><div class="ks-v">${d.cri}</div></div>
-      <div class="ks"><div class="ks-l">Temperature</div><div class="ks-v">${d.temp}</div></div>
+      <div class="ks"><div class="ks-l">Tolerance Zone Temperature</div><div class="ks-v">${d.temp}</div></div>
     </div>
   </div>`;
 }
@@ -540,7 +540,7 @@ function buildRec(key, d) {
   const r = d.recipe;
   const s = d.sensory;
 
-  // Menyusun teks format untuk dicopy ke clipboard
+  // Menyusun teks format untuk dicopy ke clipboard (TIDAK DIRUBAH)
   const thermalNotes = s.temp.map(t => `  - ${t}`).join('\n');
   RS[key] = [
     `ATMOSPHERE RECIPE — ${d.name}`,
@@ -555,29 +555,36 @@ function buildRec(key, d) {
     'Atlas of Atmosphere · evidence-based design'
   ].join('\n');
 
-  // Menggabungkan array thermal menjadi teks HTML dengan bullet
   const thermalText = s.temp.map(t => `· ${t}`).join('<br>');
   const paletteText = r.palette.join(' &nbsp;·&nbsp; ');
 
-  return `<div class="recipe">
-    <div class="recipe-hdr">
+  return `<div class="recipe" style="padding: 1.2rem; display: flex; flex-direction: column; gap: 1rem;">
+    <div class="recipe-hdr" style="margin-bottom: 0;">
       <div class="recipe-ttl">📋 Atmosphere Recipe</div>
       <button class="copy-btn" onclick="copyRecipe('${key}')">Copy recipe</button>
     </div>
-    <div class="recipe-body">
+
+    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start;">
       <div><div class="rf-l">Temperature</div><div class="rf-v">${r.temp}</div></div>
       <div><div class="rf-l">Colour Temp</div><div class="rf-v">${r.kelvin}</div></div>
       <div><div class="rf-l">Illuminance</div><div class="rf-v">${r.lux}</div></div>
       <div><div class="rf-l">CRI</div><div class="rf-v">${r.cri}</div></div>
-      
-      <div style="grid-column: 1 / -1; margin-top: 0.4rem;">
-        <div class="rf-l">Palette HEX</div>
-        <div style="font-size: 0.85rem; color: #fff; font-family: 'DM Sans', sans-serif;">${paletteText}</div>
-      </div>
-      
-      <div style="grid-column: 1 / -1; margin-top: 0.2rem;">
-        <div class="rf-l">Thermal Details</div>
+      <div><div class="rf-l">Palette HEX</div><div style="font-size: 0.9rem; color: #fff; font-family: 'DM Sans', sans-serif; margin-top: 0.15rem;">${paletteText}</div></div>
+    </div>
+
+    <div style="height: 1px; background: rgba(255,255,255,0.08); width: 100%;"></div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+      <div>
+        <div class="rf-l">Thermal Details Optimal Point (The Sweet Spot)</div>
         <div style="font-size: 0.8rem; color: var(--mist); font-family: 'DM Sans', sans-serif; line-height: 1.5;">${thermalText}</div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 0.7rem 1rem; border-radius: 6px;">
+        <div class="rf-l" style="color: var(--amber-light); margin-bottom: 0.3rem;">💡 The Science of Temperature</div>
+        <div style="font-size: 0.75rem; color: var(--mist); font-family: 'DM Sans', sans-serif; line-height: 1.4;">
+          The primary temperature in above is the <strong>Comfort Zone</strong>. The specific range in the thermal details is the <strong>Evidence-Based Sweet Spot</strong> proven to optimize physiological responses.
+        </div>
       </div>
     </div>
   </div>`;
