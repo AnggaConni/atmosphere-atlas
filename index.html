@@ -536,10 +536,51 @@ function buildSen(d){
 }
 
 // ── BUILD RECIPE ──
-function buildRec(key,d){
-  const r=d.recipe;
-  RS[key]=[`ATMOSPHERE RECIPE — ${d.name}`,'─'.repeat(32),`Temperature : ${r.temp}`,`Colour Temp : ${r.kelvin}`,`Illuminance : ${r.lux}`,`CRI         : ${r.cri}`,`Palette     : ${r.palette.join(' · ')}`,'─'.repeat(32),'Atlas of Atmosphere · evidence-based design'].join('\n');
-  return `<div class="recipe"><div class="recipe-hdr"><div class="recipe-ttl">📋 Atmosphere Recipe</div><button class="copy-btn" onclick="copyRecipe('${key}')">Copy recipe</button></div><div class="recipe-body"><div><div class="rf-l">Temperature</div><div class="rf-v">${r.temp}</div></div><div><div class="rf-l">Colour Temp</div><div class="rf-v">${r.kelvin}</div></div><div><div class="rf-l">Illuminance</div><div class="rf-v">${r.lux}</div></div><div><div class="rf-l">CRI</div><div class="rf-v">${r.cri}</div></div></div></div>`;
+function buildRec(key, d) {
+  const r = d.recipe;
+  const s = d.sensory;
+
+  // Menyusun teks format untuk dicopy ke clipboard
+  const thermalNotes = s.temp.map(t => `  - ${t}`).join('\n');
+  RS[key] = [
+    `ATMOSPHERE RECIPE — ${d.name}`,
+    '─'.repeat(32),
+    `Temperature : ${r.temp}`,
+    `Colour Temp : ${r.kelvin}`,
+    `Illuminance : ${r.lux}`,
+    `CRI         : ${r.cri}`,
+    `Palette     : ${r.palette.join(', ')}`,
+    `Thermal     :\n${thermalNotes}`,
+    '─'.repeat(32),
+    'Atlas of Atmosphere · evidence-based design'
+  ].join('\n');
+
+  // Menggabungkan array thermal menjadi teks HTML dengan bullet
+  const thermalText = s.temp.map(t => `· ${t}`).join('<br>');
+  const paletteText = r.palette.join(' &nbsp;·&nbsp; ');
+
+  return `<div class="recipe">
+    <div class="recipe-hdr">
+      <div class="recipe-ttl">📋 Atmosphere Recipe</div>
+      <button class="copy-btn" onclick="copyRecipe('${key}')">Copy recipe</button>
+    </div>
+    <div class="recipe-body">
+      <div><div class="rf-l">Temperature</div><div class="rf-v">${r.temp}</div></div>
+      <div><div class="rf-l">Colour Temp</div><div class="rf-v">${r.kelvin}</div></div>
+      <div><div class="rf-l">Illuminance</div><div class="rf-v">${r.lux}</div></div>
+      <div><div class="rf-l">CRI</div><div class="rf-v">${r.cri}</div></div>
+      
+      <div style="grid-column: 1 / -1; margin-top: 0.4rem;">
+        <div class="rf-l">Palette HEX</div>
+        <div style="font-size: 0.85rem; color: #fff; font-family: 'DM Sans', sans-serif;">${paletteText}</div>
+      </div>
+      
+      <div style="grid-column: 1 / -1; margin-top: 0.2rem;">
+        <div class="rf-l">Thermal Details</div>
+        <div style="font-size: 0.8rem; color: var(--mist); font-family: 'DM Sans', sans-serif; line-height: 1.5;">${thermalText}</div>
+      </div>
+    </div>
+  </div>`;
 }
 
 // ── BUILD DETAIL ──
