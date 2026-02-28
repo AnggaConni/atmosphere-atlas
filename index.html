@@ -631,9 +631,17 @@ function buildEv(d){
   return `<div class="card"><div class="c-label">Why it works · Evidence Summary</div><div class="ev">${d.ev}</div></div><div class="study-grid">${cards}</div>`;
 }
 
+// ── BUILD PALETTE ──
 function buildPal(d){
-  const sw=d.palette.map(c=>`<div class="sw" onclick="copyHex('${c.hex}')"><div class="sw-bg" style="background:${c.hex};"><div class="sw-cp">Copy</div></div><div class="sw-info"><div class="sw-hex">${c.hex}</div><div class="sw-name">${c.name}</div><div class="sw-role">${c.role}</div></div></div>`).join('');
-  return `<div class="card"><div class="c-label">🎨 Colour Palette</div><p style="font-size:.82rem;color:var(--text-3);margin-bottom:1rem;line-height:1.6;">Tap any swatch to copy its hex code.</p><div class="pal-grid">${sw}</div></div>`;
+  const sw=d.palette.map(c=>`<div class="sw" onclick="copyHex('${c.hex}')"><div class="sw-bg" style="background:${c.hex};"><div class="sw-cp">Copy HEX</div></div><div class="sw-info"><div class="sw-hex">${c.hex}</div><div class="sw-name">${c.name}</div><div class="sw-role">${c.role}</div></div></div>`).join('');
+  
+  return `<div class="card">
+    <div class="c-label">🎨 Colour Palette</div>
+    <p style="font-size: 0.83rem; color: var(--text-3); margin-bottom: 1rem; line-height: 1.6;">
+      <strong>Tap any swatch to copy its hex code.</strong> These palettes are curated specifically for interior wall paints to influence mood and behavior through environmental psychology, such as reducing cortisol or enhancing cognitive clarity.
+    </p>
+    <div class="pal-grid">${sw}</div>
+  </div>`;
 }
 
 function buildSen(d){
