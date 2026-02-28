@@ -2,231 +2,317 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Atlas of Atmosphere · Evidence-Based Design</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --bg:#f4f6f9;
-  --surface:#ffffff;
-  --surface2:#f0f3f7;
-  --border:#dde3ec;
-  --border-strong:#b8c4d6;
-  --navy:#0f2744;
-  --navy-mid:#1e3a5f;
-  --navy-light:#2e5382;
-  --slate:#4a6080;
-  --slate-light:#7a92ad;
-  --mist:#b8cde0;
-  --amber:#c8852a;
-  --amber-light:#e8a43a;
-  --amber-pale:#fef3e2;
-  --amber-dim:rgba(200,133,42,0.1);
-  --text:#0f2744;
-  --text-2:#2e4a68;
-  --text-3:#4a6a8a;
-  --text-4:#7a98b8;
-  --text-5:#a8c0d4;
-  --radius:16px;
-  --radius-sm:10px;
-  --shadow-sm:0 1px 3px rgba(15,39,68,0.06),0 1px 2px rgba(15,39,68,0.04);
-  --shadow:0 4px 12px rgba(15,39,68,0.08),0 2px 4px rgba(15,39,68,0.04);
-  --shadow-lg:0 12px 32px rgba(15,39,68,0.1),0 4px 8px rgba(15,39,68,0.06);
+  --bg:#f4f6f9;--surface:#ffffff;--surface2:#f0f3f7;--border:#dde3ec;--border-strong:#b8c4d6;
+  --navy:#0f2744;--navy-mid:#1e3a5f;--navy-light:#2e5382;--slate:#4a6080;--slate-light:#7a92ad;
+  --mist:#b8cde0;--amber:#c8852a;--amber-light:#e8a43a;--amber-pale:#fef3e2;--amber-dim:rgba(200,133,42,0.1);
+  --text:#0f2744;--text-2:#2e4a68;--text-3:#4a6a8a;--text-4:#7a98b8;--text-5:#a8c0d4;
+  --radius:16px;--radius-sm:10px;
+  --shadow-sm:0 1px 3px rgba(15,39,68,.06),0 1px 2px rgba(15,39,68,.04);
+  --shadow:0 4px 12px rgba(15,39,68,.08),0 2px 4px rgba(15,39,68,.04);
+  --shadow-lg:0 12px 32px rgba(15,39,68,.1),0 4px 8px rgba(15,39,68,.06);
+  --bottom-nav-h:64px;
+  --topbar-h:54px;
 }
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;line-height:1.5;}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;line-height:1.5;overscroll-behavior:none;}
 
-/* TOPBAR */
-.topbar{background:var(--navy);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;height:54px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
-.brand{display:flex;align-items:baseline;gap:0.5rem;text-decoration:none;}
-.brand-serif{font-family:'DM Serif Display',Georgia,serif;font-size:1.2rem;color:#fff;letter-spacing:-0.01em;}
+/* ─── TOPBAR ─── */
+.topbar{background:var(--navy);padding:0 1rem 0 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:.8rem;height:var(--topbar-h);position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.25);}
+.brand{display:flex;align-items:baseline;gap:.45rem;text-decoration:none;flex:1;min-width:0;}
+.brand-serif{font-family:'DM Serif Display',Georgia,serif;font-size:1.15rem;color:#fff;letter-spacing:-.01em;white-space:nowrap;}
 .brand-serif em{font-style:italic;color:var(--amber-light);}
-.brand-tag{font-size:0.67rem;font-weight:600;color:var(--mist);letter-spacing:0.07em;text-transform:uppercase;padding:0.12rem 0.5rem;background:rgba(255,255,255,0.1);border-radius:20px;}
-.topbar-actions{display:flex;gap:0.4rem;}
-.btn-mode{padding:0.32rem 0.8rem;border-radius:20px;font-size:0.77rem;font-weight:600;font-family:'DM Sans',sans-serif;border:1.5px solid rgba(255,255,255,0.15);background:transparent;color:var(--mist);cursor:pointer;transition:all 0.15s;letter-spacing:0.02em;}
-.btn-mode:hover{background:rgba(255,255,255,0.08);color:#fff;}
-.btn-mode.active{background:var(--amber);border-color:var(--amber);color:#fff;}
+.brand-tag{font-size:.62rem;font-weight:600;color:var(--mist);letter-spacing:.07em;text-transform:uppercase;padding:.1rem .45rem;background:rgba(255,255,255,.1);border-radius:20px;flex-shrink:0;}
+.topbar-right{display:flex;align-items:center;gap:.4rem;flex-shrink:0;}
+.btn-icon{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);color:var(--mist);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:all .15s;font-family:'DM Sans',sans-serif;}
+.btn-icon:hover,.btn-icon.active{background:var(--amber);border-color:var(--amber);color:#fff;}
+.fav-count{position:absolute;top:-3px;right:-3px;background:var(--amber);color:#fff;font-size:.55rem;font-weight:700;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;line-height:1;border:1.5px solid var(--navy);}
+.btn-icon-wrap{position:relative;}
 
-/* LAYOUT */
-.app{display:grid;grid-template-columns:252px 1fr;min-height:calc(100vh - 54px);}
-@media(max-width:860px){.app{grid-template-columns:1fr;} .sidebar{display:none;} .mob-select{display:block;}}
+/* ─── LAYOUT ─── */
+.app{display:grid;grid-template-columns:252px 1fr;min-height:calc(100vh - var(--topbar-h));}
 
-/* SIDEBAR */
-.sidebar{background:var(--surface);border-right:1px solid var(--border);padding:1rem 0.7rem;position:sticky;top:54px;height:calc(100vh - 54px);overflow-y:auto;}
-.mob-select{display:none;padding:0.8rem;background:var(--surface);border-bottom:1px solid var(--border);}
-.mob-select select{width:100%;padding:0.6rem 0.9rem;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:0.9rem;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);appearance:none;}
-.s-label{font-size:0.66rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-5);padding:0.7rem 0.7rem 0.3rem;}
-.act-btn{width:100%;display:flex;align-items:center;gap:0.6rem;padding:0.55rem 0.7rem;border-radius:8px;border:none;background:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.86rem;font-weight:500;color:var(--text-3);text-align:left;transition:all 0.12s;position:relative;}
+/* ─── SIDEBAR (desktop) ─── */
+.sidebar{background:var(--surface);border-right:1px solid var(--border);padding:1rem .7rem;position:sticky;top:var(--topbar-h);height:calc(100vh - var(--topbar-h));overflow-y:auto;}
+.s-label{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-5);padding:.7rem .7rem .3rem;}
+.act-btn{width:100%;display:flex;align-items:center;gap:.6rem;padding:.6rem .7rem;border-radius:8px;border:none;background:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:500;color:var(--text-3);text-align:left;transition:all .12s;position:relative;touch-action:manipulation;}
 .act-btn:hover{background:var(--surface2);color:var(--text);}
 .act-btn.sel{background:var(--amber-pale);color:var(--amber);font-weight:600;}
 .act-btn.sel::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:3px;background:var(--amber);border-radius:0 3px 3px 0;}
 .act-icon{font-size:1rem;flex-shrink:0;width:1.3rem;text-align:center;}
-.act-badge{margin-left:auto;font-size:0.58rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.1rem 0.4rem;border-radius:10px;background:var(--surface2);color:var(--text-5);flex-shrink:0;}
-.act-btn.sel .act-badge{background:rgba(200,133,42,0.15);color:var(--amber);}
-.s-div{height:1px;background:var(--border);margin:0.5rem 0.7rem;}
+.act-badge{margin-left:auto;font-size:.58rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.1rem .4rem;border-radius:10px;background:var(--surface2);color:var(--text-5);flex-shrink:0;}
+.act-btn.sel .act-badge{background:rgba(200,133,42,.15);color:var(--amber);}
+.fav-star{margin-left:.2rem;font-size:.85rem;opacity:0;transition:opacity .15s;}
+.act-btn:hover .fav-star{opacity:.5;}
+.act-btn.faved .fav-star{opacity:1;}
+.s-div{height:1px;background:var(--border);margin:.5rem .7rem;}
 
-/* MAIN */
+/* ─── MAIN ─── */
 .main{padding:1.8rem;min-width:0;}
-@media(max-width:600px){.main{padding:1rem;}}
 
-/* EMPTY */
-.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:58vh;gap:0.9rem;text-align:center;}
+/* ─── BOTTOM NAV (mobile only) ─── */
+.bottom-nav{display:none;}
+
+/* ─── ACTIVITY DRAWER (mobile) ─── */
+.drawer-overlay{display:none;position:fixed;inset:0;background:rgba(10,20,35,.55);z-index:400;backdrop-filter:blur(3px);opacity:0;transition:opacity .25s;}
+.drawer-overlay.open{opacity:1;}
+.drawer{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-radius:20px 20px 0 0;z-index:401;max-height:85vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .32s cubic-bezier(.32,.72,0,1);}
+.drawer.open{transform:translateY(0);}
+.drawer-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 4px;}
+.drawer-header{padding:.6rem 1.2rem 1rem;border-bottom:1px solid var(--border);}
+.drawer-title{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--navy);margin-bottom:.75rem;}
+.search-wrap{position:relative;}
+.search-input{width:100%;padding:.65rem .65rem .65rem 2.3rem;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.9rem;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);outline:none;transition:border-color .15s;}
+.search-input:focus{border-color:var(--amber);}
+.search-icon{position:absolute;left:.7rem;top:50%;transform:translateY(-50%);font-size:.9rem;pointer-events:none;}
+.drawer-body{overflow-y:auto;padding:.7rem .8rem 1rem;-webkit-overflow-scrolling:touch;}
+.drawer-section-label{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-5);padding:.6rem .4rem .3rem;}
+.drawer-act-btn{width:100%;display:flex;align-items:center;gap:.75rem;padding:.75rem .9rem;border-radius:10px;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;color:var(--text-2);text-align:left;margin-bottom:.45rem;transition:all .12s;touch-action:manipulation;position:relative;}
+.drawer-act-btn:active{transform:scale(.98);}
+.drawer-act-btn.sel{background:var(--amber-pale);border-color:var(--amber);color:var(--amber);font-weight:600;}
+.drawer-act-btn.faved .fav-star{opacity:1;}
+.drawer-act-btn .fav-star{position:absolute;right:.9rem;font-size:.9rem;opacity:.3;}
+.dab-right{margin-left:auto;display:flex;align-items:center;gap:.5rem;}
+.dab-badge{font-size:.58rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.1rem .45rem;border-radius:10px;background:var(--surface2);color:var(--text-5);}
+.drawer-act-btn.sel .dab-badge{background:rgba(200,133,42,.15);color:var(--amber);}
+
+/* ─── MODE SWITCHER (mobile, in topbar area) ─── */
+.mode-switcher{display:flex;background:rgba(255,255,255,.08);border-radius:20px;padding:3px;gap:2px;}
+.btn-mode{padding:.28rem .75rem;border-radius:16px;font-size:.72rem;font-weight:600;font-family:'DM Sans',sans-serif;border:none;background:transparent;color:var(--mist);cursor:pointer;transition:all .15s;letter-spacing:.02em;white-space:nowrap;}
+.btn-mode.active{background:var(--amber);color:#fff;}
+
+/* ─── EMPTY ─── */
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:58vh;gap:.9rem;text-align:center;}
 .empty-em{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--surface2),var(--border));display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--text-5);box-shadow:var(--shadow);}
 .empty h3{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--text-2);font-weight:400;}
-.empty p{font-size:0.87rem;color:var(--text-4);max-width:280px;line-height:1.6;}
+.empty p{font-size:.87rem;color:var(--text-4);max-width:280px;line-height:1.6;}
+.empty-cta{margin-top:.4rem;background:var(--amber);color:#fff;border:none;border-radius:24px;padding:.65rem 1.5rem;font-size:.85rem;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;display:none;touch-action:manipulation;}
 
-/* DETAIL */
-.detail{animation:up 0.22s ease both;}
+/* ─── DETAIL ─── */
+.detail{animation:up .22s ease both;}
 @keyframes up{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 
-/* HERO */
+/* ─── HERO ─── */
 .hero{background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:1.4rem;box-shadow:var(--shadow-lg);}
 .hero-vis{height:148px;position:relative;overflow:hidden;}
-.hero-glow{position:absolute;inset:0;transition:background 0.7s ease;}
-.hero-floor{position:absolute;bottom:0;left:0;right:0;height:34px;background:rgba(0,0,0,0.3);border-top:1px solid rgba(255,255,255,0.06);}
+.hero-glow{position:absolute;inset:0;transition:background .7s ease;}
+.hero-floor{position:absolute;bottom:0;left:0;right:0;height:34px;background:rgba(0,0,0,.3);border-top:1px solid rgba(255,255,255,.06);}
 .hero-objs{position:absolute;bottom:34px;left:0;right:0;display:flex;justify-content:center;align-items:flex-end;gap:1.4rem;padding:0 3rem;}
-.hero-obj{background:rgba(0,0,0,0.32);border-radius:4px 4px 0 0;flex-shrink:0;}
-.hero-bulb{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:7px;height:7px;border-radius:50%;transition:all 0.7s;}
+.hero-obj{background:rgba(0,0,0,.32);border-radius:4px 4px 0 0;flex-shrink:0;}
+.hero-bulb{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:7px;height:7px;border-radius:50%;transition:all .7s;}
 .hero-fade{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 25%,var(--navy) 100%);}
-.hero-body{padding:1.3rem 1.7rem 1.7rem;}
-.hero-name{font-family:'DM Serif Display',serif;font-size:1.8rem;font-weight:400;color:#fff;letter-spacing:-0.02em;margin-bottom:0.9rem;}
-.hero-chips{display:flex;flex-wrap:wrap;gap:0.45rem;}
-.hc{padding:0.3rem 0.8rem;border-radius:20px;font-size:0.76rem;font-weight:600;letter-spacing:0.01em;display:flex;align-items:center;gap:0.3rem;}
-.hc-a{background:rgba(200,133,42,0.2);border:1px solid rgba(200,133,42,0.3);color:var(--amber-light);}
-.hc-g{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--mist);}
+.hero-body{padding:1.1rem 1.4rem 1.5rem;}
+.hero-name{font-family:'DM Serif Display',serif;font-size:1.6rem;font-weight:400;color:#fff;letter-spacing:-.02em;margin-bottom:.8rem;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:.4rem;}
+.hc{padding:.28rem .75rem;border-radius:20px;font-size:.74rem;font-weight:600;letter-spacing:.01em;display:flex;align-items:center;gap:.3rem;}
+.hc-a{background:rgba(200,133,42,.2);border:1px solid rgba(200,133,42,.3);color:var(--amber-light);}
+.hc-g{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--mist);}
+.hero-fav{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.3);border:1.5px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:.9rem;cursor:pointer;transition:all .2s;touch-action:manipulation;}
+.hero-fav:hover,.hero-fav.active{background:rgba(200,133,42,.3);border-color:var(--amber);}
+.hero-header-rel{position:relative;}
 
-/* TABS */
+/* ─── TABS ─── */
 .tabs{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1.3rem;box-shadow:var(--shadow-sm);}
-.tab{flex:1;padding:0.7rem 0.8rem;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;color:var(--text-4);cursor:pointer;transition:all 0.12s;letter-spacing:0.04em;text-transform:uppercase;border-bottom:2px solid transparent;}
+.tab{flex:1;padding:.7rem .5rem;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:.76rem;font-weight:600;color:var(--text-4);cursor:pointer;transition:all .12s;letter-spacing:.03em;text-transform:uppercase;border-bottom:2px solid transparent;touch-action:manipulation;}
 .tab:not(:last-child){border-right:1px solid var(--border);}
 .tab:hover{color:var(--text-2);background:var(--surface2);}
 .tab.on{color:var(--amber);background:var(--amber-pale);border-bottom-color:var(--amber);}
 .tpanels>*{display:none;}.tpanels>.on{display:block;}
 
-/* CARD */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.1rem;box-shadow:var(--shadow-sm);}
-.c-label{font-size:0.67rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-4);margin-bottom:0.85rem;display:flex;align-items:center;gap:0.4rem;}
-.c-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:0.4rem;}
+/* ─── CARD ─── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;margin-bottom:1.1rem;box-shadow:var(--shadow-sm);}
+.c-label{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-4);margin-bottom:.85rem;display:flex;align-items:center;gap:.4rem;}
+.c-label::after{content:'';flex:1;height:1px;background:var(--border);margin-left:.4rem;}
 
-/* EVIDENCE */
-.ev{font-size:0.92rem;line-height:1.8;color:var(--text-2);}
+/* ─── EVIDENCE ─── */
+.ev{font-size:.9rem;line-height:1.8;color:var(--text-2);}
 .ev strong{color:var(--navy);font-weight:600;}
-.study-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:0.85rem;margin-top:0.9rem;}
-.sc{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem 1.1rem;position:relative;overflow:hidden;transition:box-shadow 0.13s;}
+.study-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.85rem;margin-top:.9rem;}
+.sc{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem 1.1rem;position:relative;overflow:hidden;transition:box-shadow .13s;}
 .sc:hover{box-shadow:var(--shadow);}
 .sc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);}
-.sc-src{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--amber);margin-bottom:0.4rem;}
-.sc-find{font-size:0.85rem;line-height:1.55;color:var(--text-2);}
-.sc-link{display:inline-flex;align-items:center;gap:0.3rem;margin-top:0.65rem;font-size:0.75rem;font-weight:600;color:var(--slate-light);text-decoration:none;transition:color 0.12s;}
+.sc-src{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--amber);margin-bottom:.4rem;}
+.sc-find{font-size:.84rem;line-height:1.55;color:var(--text-2);}
+.sc-link{display:inline-flex;align-items:center;gap:.3rem;margin-top:.65rem;font-size:.75rem;font-weight:600;color:var(--slate-light);text-decoration:none;transition:color .12s;}
 .sc-link:hover{color:var(--amber);}
 
-/* KELVIN */
-.k-card{background:var(--navy);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.1rem;box-shadow:var(--shadow-sm);}
-.k-lbl{font-size:0.67rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--mist);margin-bottom:0.85rem;}
-.k-bar{height:15px;border-radius:8px;background:linear-gradient(to right,#ff4200 0%,#ff6600 6%,#ff8800 11%,#ffaa40 17%,#ffc060 23%,#ffd280 29%,#ffe4b0 36%,#fff2d8 44%,#fff8f0 51%,#f0f0ff 58%,#dde8ff 65%,#b8d4ff 74%,#88b8ff 85%,#60a0ff 94%,#4488ff 100%);box-shadow:0 2px 10px rgba(0,0,0,0.3);}
-.k-wrap{position:relative;margin:0.9rem 0 0.5rem;}
+/* ─── KELVIN ─── */
+.k-card{background:var(--navy);border-radius:var(--radius);padding:1.4rem;margin-bottom:1.1rem;box-shadow:var(--shadow-sm);}
+.k-lbl{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mist);margin-bottom:.85rem;}
+.k-bar{height:15px;border-radius:8px;background:linear-gradient(to right,#ff4200 0%,#ff6600 6%,#ff8800 11%,#ffaa40 17%,#ffc060 23%,#ffd280 29%,#ffe4b0 36%,#fff2d8 44%,#fff8f0 51%,#f0f0ff 58%,#dde8ff 65%,#b8d4ff 74%,#88b8ff 85%,#60a0ff 94%,#4488ff 100%);box-shadow:0 2px 10px rgba(0,0,0,.3);}
+.k-wrap{position:relative;margin:.9rem 0 .5rem;}
 .k-mark{position:absolute;top:-7px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;pointer-events:none;}
-.k-lbl2{background:#fff;color:var(--navy);font-size:0.68rem;font-weight:700;padding:0.18rem 0.5rem;border-radius:4px;white-space:nowrap;margin-bottom:2px;box-shadow:0 2px 6px rgba(0,0,0,0.25);}
-.k-needle{width:2px;height:26px;background:rgba(255,255,255,0.85);border-radius:2px;box-shadow:0 0 5px rgba(255,255,255,0.4);}
-.k-scale{display:flex;justify-content:space-between;margin-top:0.4rem;}
-.k-scale span{font-size:0.64rem;color:var(--mist);font-weight:400;}
-.k-stats{display:flex;gap:1.8rem;margin-top:1.1rem;flex-wrap:wrap;}
-.ks .ks-l{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--mist);font-weight:600;margin-bottom:0.2rem;}
-.ks .ks-v{font-family:'DM Serif Display',serif;font-size:1.2rem;font-style:italic;color:#fff;}
+.k-lbl2{background:#fff;color:var(--navy);font-size:.68rem;font-weight:700;padding:.18rem .5rem;border-radius:4px;white-space:nowrap;margin-bottom:2px;box-shadow:0 2px 6px rgba(0,0,0,.25);}
+.k-needle{width:2px;height:26px;background:rgba(255,255,255,.85);border-radius:2px;box-shadow:0 0 5px rgba(255,255,255,.4);}
+.k-scale{display:flex;justify-content:space-between;margin-top:.4rem;}
+.k-scale span{font-size:.62rem;color:var(--mist);font-weight:400;}
+.k-stats{display:flex;gap:1.5rem;margin-top:1.1rem;flex-wrap:wrap;}
+.ks .ks-l{font-size:.63rem;text-transform:uppercase;letter-spacing:.1em;color:var(--mist);font-weight:600;margin-bottom:.2rem;}
+.ks .ks-v{font-family:'DM Serif Display',serif;font-size:1.1rem;font-style:italic;color:#fff;}
 
-/* PALETTE */
-.pal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:0.85rem;}
-.sw{border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:all 0.14s;box-shadow:var(--shadow-sm);}
-.sw:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
-.sw-bg{height:84px;position:relative;}
-.sw-cp{position:absolute;inset:0;background:rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#fff;letter-spacing:0.05em;opacity:0;transition:opacity 0.12s;text-transform:uppercase;}
+/* ─── PALETTE ─── */
+.pal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.8rem;}
+.sw{border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:all .14s;box-shadow:var(--shadow-sm);}
+.sw:hover,.sw:active{transform:translateY(-2px);box-shadow:var(--shadow);}
+.sw-bg{height:76px;position:relative;}
+.sw-cp{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff;letter-spacing:.05em;opacity:0;transition:opacity .12s;text-transform:uppercase;}
 .sw:hover .sw-cp{opacity:1;}
-.sw-info{padding:0.65rem 0.75rem;background:var(--surface);}
-.sw-hex{font-family:'DM Serif Display',serif;font-style:italic;font-size:0.9rem;color:var(--navy);}
-.sw-name{font-size:0.7rem;color:var(--text-3);margin-top:0.12rem;}
-.sw-role{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-5);margin-top:0.18rem;font-weight:600;}
+.sw-info{padding:.6rem .7rem;background:var(--surface);}
+.sw-hex{font-family:'DM Serif Display',serif;font-style:italic;font-size:.88rem;color:var(--navy);}
+.sw-name{font-size:.68rem;color:var(--text-3);margin-top:.1rem;}
+.sw-role{font-size:.6rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-5);margin-top:.15rem;font-weight:600;}
 
-/* SENSORY */
-.sen-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:0.85rem;}
+/* ─── SENSORY ─── */
+.sen-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:.85rem;}
 .sc2{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.1rem;}
-.sc2-icon{font-size:1.4rem;margin-bottom:0.55rem;}
-.sc2-title{font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;color:var(--text-4);margin-bottom:0.5rem;}
-.sc2-items{display:flex;flex-direction:column;gap:0.28rem;}
-.sc2-item{font-size:0.83rem;color:var(--text-2);line-height:1.42;padding-left:0.75rem;position:relative;}
+.sc2-icon{font-size:1.4rem;margin-bottom:.5rem;}
+.sc2-title{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--text-4);margin-bottom:.5rem;}
+.sc2-items{display:flex;flex-direction:column;gap:.28rem;}
+.sc2-item{font-size:.82rem;color:var(--text-2);line-height:1.42;padding-left:.75rem;position:relative;}
 .sc2-item::before{content:'·';position:absolute;left:0;color:var(--amber);font-weight:700;}
 
-/* RECIPE */
-.recipe{background:var(--navy);border-radius:var(--radius);padding:1.3rem 1.5rem;margin-top:1.1rem;}
-.recipe-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.9rem;}
-.recipe-ttl{font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--mist);}
-.copy-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:0.3rem 0.85rem;font-size:0.74rem;font-weight:600;color:var(--mist);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.12s;}
-.copy-btn:hover{background:rgba(200,133,42,0.2);border-color:rgba(200,133,42,0.4);color:var(--amber-light);}
-.recipe-body{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.7rem;}
-.rf-l{font-size:0.63rem;text-transform:uppercase;letter-spacing:0.09em;color:var(--mist);font-weight:600;margin-bottom:0.18rem;}
-.rf-v{font-family:'DM Serif Display',serif;font-style:italic;font-size:1rem;color:#fff;}
+/* ─── RECIPE ─── */
+.recipe{background:var(--navy);border-radius:var(--radius);padding:1.2rem 1.4rem;margin-top:1.1rem;}
+.recipe-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem;}
+.recipe-ttl{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--mist);}
+.copy-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:.3rem .85rem;font-size:.74rem;font-weight:600;color:var(--mist);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .12s;touch-action:manipulation;}
+.copy-btn:hover{background:rgba(200,133,42,.2);border-color:rgba(200,133,42,.4);color:var(--amber-light);}
+.recipe-grid{display:flex;flex-wrap:wrap;gap:1.2rem;margin-bottom:.9rem;}
+.rf-l{font-size:.63rem;text-transform:uppercase;letter-spacing:.09em;color:var(--mist);font-weight:600;margin-bottom:.18rem;}
+.rf-v{font-family:'DM Serif Display',serif;font-style:italic;font-size:.98rem;color:#fff;}
+.recipe-div{height:1px;background:rgba(255,255,255,.08);width:100%;margin-bottom:.9rem;}
+.recipe-thermal{font-size:.8rem;color:var(--mist);line-height:1.55;}
+.recipe-science{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:.7rem 1rem;border-radius:6px;margin-top:.8rem;}
+.recipe-science-lbl{font-size:.62rem;text-transform:uppercase;letter-spacing:.09em;color:var(--amber-light);font-weight:600;margin-bottom:.3rem;}
+.recipe-science-txt{font-size:.74rem;color:var(--mist);line-height:1.4;}
 
-/* COMPARE */
-.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;}
-@media(max-width:700px){.cmp-grid{grid-template-columns:1fr;}}
-.cmp-prompt{background:var(--surface);border:2px dashed var(--border);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;gap:0.7rem;color:var(--text-5);font-size:0.87rem;text-align:center;padding:2rem;}
-.cmp-num{font-family:'DM Serif Display',serif;font-size:2.3rem;font-style:italic;opacity:0.2;}
-.mini-hero{background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem;box-shadow:var(--shadow);}
-.mini-vis{height:96px;position:relative;overflow:hidden;}
-.mini-body{padding:0.9rem 1.1rem 1.1rem;}
-.mini-name{font-family:'DM Serif Display',serif;font-size:1.2rem;color:#fff;margin-bottom:0.55rem;}
-.mini-chips{display:flex;flex-wrap:wrap;gap:0.35rem;}
-.mc{font-size:0.7rem;font-weight:600;padding:0.22rem 0.6rem;border-radius:20px;background:rgba(200,133,42,0.2);border:1px solid rgba(200,133,42,0.3);color:var(--amber-light);}
-.cmp-ev{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem 1.1rem;font-size:0.83rem;line-height:1.62;color:var(--text-2);margin-bottom:1rem;}
+/* ─── COMPARE ─── */
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+.cmp-prompt{background:var(--surface);border:2px dashed var(--border);border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;gap:.7rem;color:var(--text-5);font-size:.87rem;text-align:center;padding:2rem;}
+.cmp-num{font-family:'DM Serif Display',serif;font-size:2.3rem;font-style:italic;opacity:.2;}
+.mini-hero{background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:.85rem;box-shadow:var(--shadow);}
+.mini-vis{height:88px;position:relative;overflow:hidden;}
+.mini-body{padding:.85rem 1rem 1rem;}
+.mini-name{font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;margin-bottom:.5rem;}
+.mini-chips{display:flex;flex-wrap:wrap;gap:.3rem;}
+.mc{font-size:.68rem;font-weight:600;padding:.2rem .55rem;border-radius:20px;background:rgba(200,133,42,.2);border:1px solid rgba(200,133,42,.3);color:var(--amber-light);}
+.cmp-ev{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.9rem 1rem;font-size:.82rem;line-height:1.6;color:var(--text-2);margin-bottom:.85rem;}
 .cmp-ev strong{color:var(--navy);}
 
-/* TOAST */
-.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(14px);background:var(--navy);color:#fff;padding:0.5rem 1.2rem;border-radius:30px;font-size:0.8rem;font-weight:600;opacity:0;transition:all 0.2s;pointer-events:none;z-index:9999;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,0.1);}
-.t-dot{display:inline-block;width:6px;height:6px;background:var(--amber-light);border-radius:50%;margin-right:0.4rem;vertical-align:middle;}
+/* ─── FAVORITES VIEW ─── */
+.favs-view{display:none;}
+.fav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+.fav-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .15s;box-shadow:var(--shadow-sm);}
+.fav-card:hover,.fav-card:active{transform:translateY(-3px);box-shadow:var(--shadow);}
+.fav-card-vis{height:80px;position:relative;overflow:hidden;}
+.fav-card-body{padding:.85rem;}
+.fav-card-name{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--text);margin-bottom:.35rem;}
+.fav-card-meta{font-size:.74rem;color:var(--text-4);}
+.fav-empty{text-align:center;padding:4rem 1rem;color:var(--text-4);}
+.fav-empty-icon{font-size:2.5rem;margin-bottom:.8rem;}
+.fav-empty-txt{font-size:.9rem;}
+
+/* ─── TOAST ─── */
+.toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(14px);background:var(--navy);color:#fff;padding:.5rem 1.2rem;border-radius:30px;font-size:.8rem;font-weight:600;opacity:0;transition:all .2s;pointer-events:none;z-index:9999;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.1);}
+.t-dot{display:inline-block;width:6px;height:6px;background:var(--amber-light);border-radius:50%;margin-right:.4rem;vertical-align:middle;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ─── SCROLLBAR ─── */
 ::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+/* ════════════════════════════════════════
+   MOBILE RESPONSIVE (≤860px)
+════════════════════════════════════════ */
+@media(max-width:860px){
+  .sidebar{display:none;}
+  .app{grid-template-columns:1fr;min-height:calc(100vh - var(--topbar-h) - var(--bottom-nav-h));}
+  .main{padding:1rem 1rem calc(var(--bottom-nav-h) + 1.2rem);}
+
+  /* Bottom Nav */
+  .bottom-nav{
+    display:flex;position:fixed;bottom:0;left:0;right:0;height:var(--bottom-nav-h);
+    background:var(--surface);border-top:1px solid var(--border);z-index:300;
+    box-shadow:0 -4px 16px rgba(15,39,68,.1);
+    padding:0 .5rem;align-items:stretch;gap:.2rem;
+  }
+  .bn-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:none;cursor:pointer;border-radius:10px;padding:.3rem .2rem;transition:all .15s;font-family:'DM Sans',sans-serif;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+  .bn-btn:active{transform:scale(.92);}
+  .bn-icon{font-size:1.25rem;line-height:1;}
+  .bn-label{font-size:.6rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-4);}
+  .bn-btn.active .bn-label{color:var(--amber);}
+  .bn-btn.active .bn-icon{transform:scale(1.1);}
+  .bn-pip{width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:1px;}
+
+  /* Drawer */
+  .drawer-overlay{display:block;}
+
+  /* Empty state CTA button */
+  .empty-cta{display:inline-flex;align-items:center;gap:.5rem;}
+
+  /* Study grid — single col */
+  .study-grid{grid-template-columns:1fr;}
+
+  /* Compare — single col on very small */
+  @media(max-width:560px){
+    .cmp-grid{grid-template-columns:1fr;}
+  }
+
+  /* Hero smaller */
+  .hero-vis{height:120px;}
+  .hero-name{font-size:1.4rem;}
+
+  /* Kelvin scale smaller text */
+  .k-scale span{font-size:.58rem;}
+
+  /* Fav grid */
+  .fav-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));}
+
+  /* Toast above bottom nav */
+  .toast{bottom:calc(var(--bottom-nav-h) + 1rem);}
+}
+
+@media(max-width:420px){
+  .topbar{padding:0 .8rem;}
+  .brand-tag{display:none;}
+  .hero-chips .hc{font-size:.68rem;padding:.24rem .6rem;}
+  .pal-grid{grid-template-columns:1fr 1fr;}
+  .sen-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
 
+<!-- ═══════════════════ TOPBAR ═══════════════════ -->
 <nav class="topbar">
   <a class="brand" href="#">
     <span class="brand-serif"><em>atlas</em> of atmosphere</span>
     <span class="brand-tag">Evidence-Based</span>
   </a>
-  <div class="topbar-actions">
-    <button class="btn-mode active" id="btnS" onclick="setMode('single')">Single</button>
-    <button class="btn-mode" id="btnC" onclick="setMode('compare')">Compare ⇄</button>
+  <div class="topbar-right">
+    <div class="mode-switcher">
+      <button class="btn-mode active" id="btnS" onclick="setMode('single')">Single</button>
+      <button class="btn-mode" id="btnC" onclick="setMode('compare')">Compare ⇄</button>
+    </div>
+    <div class="btn-icon-wrap">
+      <button class="btn-icon" id="favTopBtn" onclick="setView('favs')" title="Favourites">♡</button>
+      <span class="fav-count" id="favCount" style="display:none">0</span>
+    </div>
   </div>
 </nav>
 
-<div class="mob-select">
-  <select id="mobSel" onchange="selectActivity(this.value,0)">
-    <option value="" disabled selected>Select an activity…</option>
-  </select>
-</div>
-
+<!-- ═══════════════════ APP ═══════════════════ -->
 <div class="app">
-  <aside class="sidebar">
+
+  <!-- Desktop Sidebar -->
+  <aside class="sidebar" id="desktopSidebar">
     <div class="s-label">Cognitive</div>
-    <button class="act-btn" data-key="focused" onclick="selectActivity('focused',0)"><span class="act-icon">🔍</span>Focused Work<span class="act-badge">cognition</span></button>
-    <button class="act-btn" data-key="reading" onclick="selectActivity('reading',0)"><span class="act-icon">📖</span>Reading &amp; Learning<span class="act-badge">cognition</span></button>
-    <button class="act-btn" data-key="creative" onclick="selectActivity('creative',0)"><span class="act-icon">🎨</span>Creative Work<span class="act-badge">creative</span></button>
-    <button class="act-btn" data-key="collab" onclick="selectActivity('collab',0)"><span class="act-icon">💬</span>Collaboration<span class="act-badge">social</span></button>
-    <button class="act-btn" data-key="video" onclick="selectActivity('video',0)"><span class="act-icon">📹</span>Video Calls<span class="act-badge">social</span></button>
-    <div class="s-div"></div>
-    <div class="s-label">Physical</div>
-    <button class="act-btn" data-key="workout" onclick="selectActivity('workout',0)"><span class="act-icon">🏋️</span>High-Intensity Workout<span class="act-badge">physical</span></button>
-    <button class="act-btn" data-key="grooming" onclick="selectActivity('grooming',0)"><span class="act-icon">💄</span>Grooming &amp; Makeup<span class="act-badge">visual</span></button>
-    <button class="act-btn" data-key="children" onclick="selectActivity('children',0)"><span class="act-icon">🧒</span>Children's Learning<span class="act-badge">NEW</span></button>
-    <div class="s-div"></div>
-    <div class="s-label">Rest &amp; Social</div>
-    <button class="act-btn" data-key="rest" onclick="selectActivity('rest',0)"><span class="act-icon">😌</span>Rest &amp; Wind-down<span class="act-badge">recovery</span></button>
-    <button class="act-btn" data-key="mindfulness" onclick="selectActivity('mindfulness',0)"><span class="act-icon">🧘</span>Mindfulness<span class="act-badge">recovery</span></button>
-    <button class="act-btn" data-key="recovery" onclick="selectActivity('recovery',0)"><span class="act-icon">🏥</span>Patient Recovery<span class="act-badge">recovery</span></button>
-    <button class="act-btn" data-key="romance" onclick="selectActivity('romance',0)"><span class="act-icon">❤️</span>Romance &amp; Intimacy<span class="act-badge">social</span></button>
-    <button class="act-btn" data-key="dining" onclick="selectActivity('dining',0)"><span class="act-icon">🍽️</span>Dining &amp; Socialising<span class="act-badge">appetite</span></button>
+    <!-- sidebar buttons injected by JS -->
   </aside>
 
   <main class="main">
@@ -234,21 +320,65 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans
       <div class="empty-em">✦</div>
       <h3>Select an activity</h3>
       <p>Each entry is traced to peer-reviewed research — light, temperature, colour, and sensory design unified.</p>
+      <button class="empty-cta" onclick="openDrawer()">🔍 Browse Activities</button>
     </div>
     <div id="singleEl" style="display:none;"></div>
     <div id="compareEl" style="display:none;"></div>
+    <div class="favs-view" id="favsEl">
+      <div style="margin-bottom:1.2rem;">
+        <div style="font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--navy);margin-bottom:.3rem;">Saved Atmospheres</div>
+        <div style="font-size:.85rem;color:var(--text-4);">Your bookmarked activity profiles</div>
+      </div>
+      <div class="fav-grid" id="favGrid"></div>
+    </div>
   </main>
 </div>
 
+<!-- ═══════════════════ BOTTOM NAV (mobile) ═══════════════════ -->
+<nav class="bottom-nav" id="bottomNav">
+  <button class="bn-btn active" id="bn-browse" onclick="openDrawer()">
+    <span class="bn-icon">🔍</span>
+    <span class="bn-label">Browse</span>
+  </button>
+  <button class="bn-btn" id="bn-single" onclick="setMode('single');closeMobileMenus();">
+    <span class="bn-icon">📋</span>
+    <span class="bn-label">Detail</span>
+  </button>
+  <button class="bn-btn" id="bn-compare" onclick="setMode('compare');closeMobileMenus();">
+    <span class="bn-icon">⇄</span>
+    <span class="bn-label">Compare</span>
+  </button>
+  <button class="bn-btn" id="bn-favs" onclick="setView('favs')">
+    <span class="bn-icon">♡</span>
+    <span class="bn-label">Saved</span>
+    <span class="bn-pip" id="bnFavPip" style="display:none"></span>
+  </button>
+</nav>
+
+<!-- ═══════════════════ DRAWER ═══════════════════ -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="actDrawer">
+  <div class="drawer-handle"></div>
+  <div class="drawer-header">
+    <div class="drawer-title">Choose an Activity</div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="searchInput" type="search" placeholder="Search activities…" oninput="filterDrawer()" autocomplete="off" autocorrect="off">
+    </div>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+</div>
+
+<!-- ═══════════════════ TOAST ═══════════════════ -->
 <div class="toast" id="toast"><span class="t-dot"></span><span id="toastMsg">Copied</span></div>
 
 <script>
 const D={
   focused:{
-    name:'Focused Work & Study',icon:'🔍',temp:'21–25°C',lux:'500–750 lx',
+    name:'Focused Work & Study',icon:'🔍',temp:'21–25°C',lux:'500–750 lx',category:'Cognitive',
     kelvin:{label:'5000K–6500K',lo:5000,hi:6500},cri:'>80',
-    glow:'radial-gradient(ellipse at 50% -10%,rgba(80,110,200,0.45),transparent 70%)',
-    bulb:'rgba(160,185,255,0.85)',
+    glow:'radial-gradient(ellipse at 50% -10%,rgba(80,110,200,.45),transparent 70%)',
+    bulb:'rgba(160,185,255,.85)',
     objs:[{w:88,h:54},{w:64,h:74},{w:88,h:44}],
     palette:[{hex:'#2C5F8A',name:'Confident Blue',role:'Primary / walls'},{hex:'#4A6D5C',name:'Focused Green',role:'Secondary accent'},{hex:'#E8EAF0',name:'Clean Mist',role:'Background'},{hex:'#D32F2F',name:'Strategic Red',role:'Accent / alert'}],
     ev:`<strong>Cool, bright light (5000–6500K at 500–750 lx)</strong> is the most evidence-backed combination for sustained cognitive performance. A landmark 100-participant ScienceDirect study (2025) found that high-CCT conditions significantly outperformed warm/dim baselines on working-memory tasks and physiological stress recovery among office workers.<br><br>A 2021 Scientific Reports EEG study (Nature) confirmed that <strong>6500K with rising illuminance shortens response times</strong> (p&lt;0.01). A 2024 Building & Environment VR study found optimal Stroop-test illuminance is 384–861 lx — significant cognitive gains vs 200 lx baselines. On colour: <strong>low-saturation blue-green walls</strong> lowered salivary cortisol 18.7% after 4 weeks (Chen & Pei 2026, Oxford RCT).`,
@@ -262,10 +392,10 @@ const D={
     recipe:{temp:'21–25°C',kelvin:'5000–6500K',lux:'500–750 lx',cri:'>80',palette:['#2C5F8A','#4A6D5C','#E8EAF0','#D32F2F']}
   },
   collab:{
-    name:'Collaboration & Ideation',icon:'💬',temp:'20–23°C',lux:'400–600 lx',
+    name:'Collaboration & Ideation',icon:'💬',temp:'20–23°C',lux:'400–600 lx',category:'Cognitive',
     kelvin:{label:'3500K–4500K',lo:3500,hi:4500},cri:'>80',
-    glow:'radial-gradient(ellipse at 50% -10%,rgba(220,150,50,0.4),transparent 70%)',
-    bulb:'rgba(255,192,100,0.8)',
+    glow:'radial-gradient(ellipse at 50% -10%,rgba(220,150,50,.4),transparent 70%)',
+    bulb:'rgba(255,192,100,.8)',
     objs:[{w:178,h:31},{w:54,h:59},{w:54,h:59}],
     palette:[{hex:'#F57C00',name:'Creative Orange',role:'Primary energy'},{hex:'#FDD835',name:'Joyful Yellow',role:'Accent / warmth'},{hex:'#8E44AD',name:'Innovative Purple',role:'Contrast accent'},{hex:'#F5F0E8',name:'Warm Cream',role:'Background'}],
     ev:`<strong>Neutral-to-warm CCT (3500–4500K)</strong> balances alert-promoting cool light with warm tones linked to divergent thinking. University of British Columbia research found warm light helped generate <strong>23% more creative solutions</strong>, correlated with lower cortisol reducing rigid thought patterns.<br><br>A 2025 Columbus Chamber industry study found "butter yellow" zones increased cross-department creative output by 20% and collaboration by 31%. The 2025 PLoS ONE WSL study confirmed 4000K as "neutral and versatile" — ideal for tasks shifting between focused review and open brainstorming.`,
@@ -277,109 +407,11 @@ const D={
     sensory:{scent:['Citrus / orange peel (energising, improves mood)','Jasmine (moderate stimulation)','Eucalyptus (clarity without over-stimulation)'],sound:['Upbeat instrumental 60–70 dBSPL','Moderate-tempo ambient jazz','Some sonic texture aids group flow state'],temp:['20–22°C ideal for conversation energy','Good ventilation prevents CO₂-related mental fog','Warm floor materials support standing meetings']},
     recipe:{temp:'20–23°C',kelvin:'3500–4500K',lux:'400–600 lx',cri:'>80',palette:['#F57C00','#FDD835','#8E44AD','#F5F0E8']}
   },
-  rest:{
-    name:'Rest & Wind-down',icon:'😌',temp:'16–20°C',lux:'30–100 lx',
-    kelvin:{label:'≤2700K',lo:1800,hi:2700},cri:'>80',
-    glow:'radial-gradient(ellipse at 50% -10%,rgba(180,90,30,0.45),transparent 70%)',
-    bulb:'rgba(255,132,52,0.72)',
-    objs:[{w:168,h:41},{w:44,h:54},{w:34,h:64}],
-    palette:[{hex:'#A8D5BA',name:'Serene Green',role:'Primary / calming'},{hex:'#F2E2BA',name:'Soft Sand',role:'Warmth / ground'},{hex:'#D1D1E9',name:'Gentle Lavender',role:'Soothing accent'},{hex:'#8D6E63',name:'Grounding Brown',role:'Stability'}],
-    ev:`<strong>Warm, dim light (≤2700K, 30–100 lx)</strong> is the most powerfully evidenced rest recommendation. An Indoor Air (Wiley) 2025 synthesis of 134 studies confirmed that evening blue light above 30–50 lux disrupts circadian timing — while amber tones preserve melatonin secretion and sleep onset.<br><br>A 2025 PMC study (Univ. Zaragoza, CEICA-approved) found <strong>red/warm light allows melatonin to rebound</strong> after 2–3 hours, contrasted with blue light which maintained suppression. Harvard research indicated warm-light groups fell asleep 19 minutes faster than cool-light controls.`,
-    studies:[
-      {s:'Indoor Air · Wiley 2025 (134-study synthesis)',f:'Moderate thermal environments 18–22°C support sleep; evening blue light >30–50 lux disrupts melatonin timing.',u:'https://onlinelibrary.wiley.com/doi/10.1155/ina/8245786'},
-      {s:'Life (Basel) · PMC 2025 (Univ. Zaragoza)',f:'Red/warm light allowed melatonin rebound after 2h; blue maintained suppression throughout night.',u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC12113466/'},
-      {s:'ScienceDirect 2024 (mixed warm LED nocturnal)',f:'Well-designed 2799K light improved sleep continuity and working memory vs 5798K.',u:'https://www.sciencedirect.com/science/article/abs/pii/S0360132324000635'},
-      {s:'Buildings · MDPI 2025',f:'Colour temperature ranked most influential factor for sleep quality; cycling to low-K in evening strongly recommended.',u:'https://doaj.org/article/8f7699c2fffc4b9da005325734dc56dc'},
-    ],
-    sensory:{scent:['Lavender (most studied sleep-promoting aroma)','Chamomile (anxiety reduction, replicated RCTs)','Valerian or sandalwood'],sound:['Pink noise or rain (~25% improved sleep onset)','Gentle binaural beats at delta/theta range','Keep below 40 dBSPL'],temp:['16–19°C optimal for sleep onset (core body cooling)','Weighted blankets compensate for cooler air','Blackout or very dim amber nightlight only']},
-    recipe:{temp:'16–20°C',kelvin:'1800–2700K',lux:'30–100 lx',cri:'>80',palette:['#A8D5BA','#F2E2BA','#D1D1E9','#8D6E63']}
-  },
-  romance:{
-    name:'Romance & Intimacy',icon:'❤️',temp:'20–24°C',lux:'20–80 lx',
-    kelvin:{label:'1800K–2700K',lo:1800,hi:2700},cri:'>80',
-    glow:'radial-gradient(ellipse at 50% -10%,rgba(180,50,70,0.45),transparent 70%)',
-    bulb:'rgba(255,92,72,0.65)',
-    objs:[{w:163,h:41},{w:34,h:54}],
-    palette:[{hex:'#B71C1C',name:'Passionate Red',role:'Arousal accent'},{hex:'#4A235A',name:'Mysterious Purple',role:'Depth / sensuality'},{hex:'#F4A460',name:'Warm Candlelight',role:'Dominant ambience'},{hex:'#1a0a0a',name:'Deep Shadow',role:'Contrast / intimacy'}],
-    ev:`<strong>Very warm, dim light (1800–2700K, 20–80 lx)</strong> — matching candlelight quality — operates on two mechanisms. First, the warm spectrum avoids melanopsin activation. Second, low intensity activates the parasympathetic nervous system, lowering heart rate and perceived threat.<br><br>The 2025 PLoS ONE WSL study found <strong>subjective preference strongly favours warm light for intimate socialising</strong>, even where physiological data showed cool light reduces cortisol more — confirming perceived comfort dominates. A 2024 Psi Chi study (Pepperdine) found <strong>warm colour environments shifted mood most positively and reduced inhibition</strong> vs cool-colour conditions.`,
-    studies:[
-      {s:'PLoS ONE · Guenat et al. 2025 (WSL)',f:'Subjects strongly preferred warm light for intimate/relaxation contexts; subjective comfort dominated physiological stress differences.',u:'https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0327843'},
-      {s:'Psi Chi Journal 2024 (Pepperdine Univ.)',f:'Warm colour + warm light combination shifted mood most positively and reduced inhibitory affect vs cool conditions.',u:'https://cdn.ymaws.com/www.psichi.org/resource/resmgr/journal_2024/29_3_Journal_Afifi.pdf'},
-      {s:'PMC · Life 2025 (Zaragoza melatonin)',f:'Red/warm light allows melatonin rebound after 2h of evening exposure — alertness-then-ease cycle.',u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC12113466/'},
-    ],
-    sensory:{scent:['Rose absolute (desire & mood elevation)','Ylang-ylang (heart rate modulation)','Vanilla (comfort and pleasure association)'],sound:['Slow jazz at 50–60 dBSPL','Neo-soul / R&B without lyrics initially','Natural fireplace crackling'],temp:['20–22°C prevents drowsiness while staying comfortable','Use throws and textures for dynamic comfort','Avoid fans that break atmosphere']},
-    recipe:{temp:'20–24°C',kelvin:'1800–2700K',lux:'20–80 lx',cri:'>80',palette:['#B71C1C','#4A235A','#F4A460','#1a0a0a']}
-  },
-  dining:{
-    name:'Dining & Socialising',icon:'🍽️',temp:'20–24°C',lux:'150–300 lx',
-    kelvin:{label:'2700K–3000K',lo:2700,hi:3000},cri:'>90',
-    glow:'radial-gradient(ellipse at 50% -10%,rgba(210,145,50,0.4),transparent 70%)',
-    bulb:'rgba(255,182,82,0.82)',
-    objs:[{w:128,h:37},{w:44,h:54},{w:44,h:54}],
-    palette:[{hex:'#E07A5F',name:'Terracotta',role:'Primary / appetite'},{hex:'#B85C38',name:'Deep Rust',role:'Anchoring warmth'},{hex:'#D4A373',name:'Soft Gold',role:'Luminous accent'},{hex:'#FAF0E6',name:'Linen White',role:'Table / background'}],
-    ev:`<strong>2700K warm light at 150–300 lx</strong> consistently tops appetite research. A 2025 MDPI Foods study using GFER facial expression recognition found <strong>consumers showed the most positive emotions and highest appetite under 2700K warm white</strong> — blue light produced the highest "sad" emotion intensity.<br><br>Cornell Food & Brand Lab research showed dim settings were 2.5× more likely to produce dessert selection. Journal of Consumer Psychology found dim-light diners spent <strong>16% more time at table</strong> and were 5× more likely to dine in larger groups. High CRI (>90) ensures food renders accurately — dish-appearance clarity explained 87% of appetite variance (Leonardo et al., 2024).`,
-    studies:[
-      {s:'MDPI Foods 2025 (GFER facial expression)',f:'Highest appetite and positive emotion under 2700K; blue light produced strongest "sad" expression and lowest appetite.',u:'https://www.mdpi.com/2304-8158/14/19/3440'},
-      {s:'Cornell Food & Brand Lab',f:'Dim rooms: 2.5× more dessert selection. Well-lit rooms: 39% more salads, 30% more vegetables.',u:'https://www.superiorseating.com/blog/restaurant-hack-dim-lighting-appetite-effect'},
-      {s:'Journal of Consumer Psychology',f:'Dim-light diners spent 16% more time at table; 5× more likely to dine in larger groups.',u:'https://www.superiorseating.com/blog/restaurant-hack-dim-lighting-appetite-effect'},
-      {s:'Leonardo et al. 2024 (AKSEN, Indonesia)',f:'Neutral-warm CCT correlated with higher appetite scores; dish appearance clarity R²=87% of appetite variance.',u:'https://journal.uc.ac.id/index.php/AKSEN/article/view/4391'},
-    ],
-    sensory:{scent:['Warm bread/vanilla (comfort and appetite)','Citrus as aperitif signal','Avoid strong florals competing with food aromas'],sound:['Conversational jazz 55–65 dBSPL','Moderate tempo encourages longer stays','Live acoustic music improves perceived food quality 10–15%'],temp:['20–24°C comfortable for extended sitting','Avoid cold drafts near tables','Warm radiant floor heating ideal for lingering']},
-    recipe:{temp:'20–24°C',kelvin:'2700–3000K',lux:'150–300 lx',cri:'>90',palette:['#E07A5F','#B85C38','#D4A373','#FAF0E6']}
-  },
-  grooming:{
-    name:'Grooming & Makeup',icon:'💄',temp:'20–22°C',lux:'800–1200 lx',
-    kelvin:{label:'4600K–6500K',lo:4600,hi:6500},cri:'≥95',
-    glow:'radial-gradient(ellipse at 50% -10%,rgba(200,210,230,0.35),transparent 70%)',
-    bulb:'rgba(240,246,255,0.92)',
-    objs:[{w:83,h:103},{w:44,h:44}],
-    palette:[{hex:'#F5E6E8',name:'Soft Pink',role:'Mirror surround'},{hex:'#F1F0E8',name:'Off-White',role:'Background neutral'},{hex:'#F8F9FA',name:'Clean White',role:'Task surface'},{hex:'#C8B8A2',name:'Warm Stone',role:'Grounding accent'}],
-    ev:`<strong>High CRI (≥95) at 4600–6500K, placed at face-level</strong> is the gold standard for grooming accuracy. At CRI 95+, skin undertones, blemishes, shadow gradients and cosmetic pigments render with near-perfect fidelity — critical for foundation matching and contour blending.<br><br>A 2022 ScienceDirect NIRS study confirmed that <strong>750 lx at 5000–6500K scores highest for workability and lowest physiological fatigue</strong> on oxy-HB measures — the sweet spot for precision tasks. Side-flanking or ring-mounted sources eliminate harsh facial shadows. Neutral walls prevent colour casts — a known source of grooming error in poorly designed bathrooms.`,
-    studies:[
-      {s:'ScienceDirect 2022 (NIRS physiological study)',f:'750 lx at 5000K–6500K scored best for workability and lowest fatigue/stress on NIRS oxy-HB physiological measure.',u:'https://www.sciencedirect.com/science/article/abs/pii/S0360132322010265'},
-      {s:'CIE / IES Colour Science Standards',f:'CRI ≥90–95 required for tasks demanding colour fidelity (cosmetic, medical, textile). Below 80 creates measurable colour discrimination errors.',u:'https://www.ies.org/lda/research-optimizing-your-workout-environment-how-lighting-impacts-exercise/'},
-      {s:'Energies MDPI 2022 (Chen, Tsai & Tsay)',f:'67-subject study: both illuminance and CCT significantly influence comfort, physiology and task performance accuracy.',u:'https://www.mdpi.com/1996-1073/15/12/4477'},
-    ],
-    sensory:{scent:['Neutral — avoid strong scents when selecting fragrances','Light citrus for morning energy','Stable humidity prevents product running'],sound:['Upbeat moderate-tempo music for routine steps','Podcasts or vocal audio for non-precision tasks','Quiet during precise application'],temp:['20–22°C — alert and precise','Control humidity 40–60%','No warm incandescent sources reflecting into mirror']},
-    recipe:{temp:'20–22°C',kelvin:'4600–6500K',lux:'800–1200 lx',cri:'≥95',palette:['#F5E6E8','#F1F0E8','#F8F9FA','#C8B8A2']}
-  },
-  workout:{
-    name:'High-Intensity Workout',icon:'🏋️',temp:'18–22°C',lux:'600–800 lx',
-    kelvin:{label:'5000K–6500K',lo:5000,hi:6500},cri:'>80',
-    glow:'radial-gradient(ellipse at 50% -10%,rgba(200,70,30,0.45),transparent 70%)',
-    bulb:'rgba(255,152,52,0.82)',
-    objs:[{w:53,h:83},{w:63,h:63},{w:53,h:83}],
-    palette:[{hex:'#D32F2F',name:'Energetic Red',role:'Activation / energy'},{hex:'#F57C00',name:'Vibrant Orange',role:'Drive / momentum'},{hex:'#FDD835',name:'Bright Yellow',role:'Visibility accent'},{hex:'#212121',name:'Stark Black',role:'Contrast / power'}],
-    ev:`<strong>Bright, cool light (5000–6500K, 600–800 lx)</strong> produces measurable performance gains. A landmark PLoS ONE study found men exposed to bright light (~4,420 lx) generated <strong>significantly more power per minute on cycle ergometry</strong> vs dim-light controls. Blue-enriched light suppresses melatonin, boosts cortisol and norepinephrine, and increases alertness.<br><br>An ASU / IES 2024 controlled gym study confirmed <strong>cool white light improved treadmill performance</strong> vs warm/dim alternatives. A Brazilian RCT meta-analysis found red light applied before exercise <strong>delays muscle fatigue onset and improves time-to-exhaustion</strong>. Temperature 18–22°C prevents performance degradation beginning above 26°C.`,
-    studies:[
-      {s:'PMC · PLoS ONE (bright light & cycling)',f:'Bright light (4420 lx) produced significantly more cycling power than dim light; effect modulated by individual chronotype.',u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC3394763/'},
-      {s:'IES Research 2024 (ASU treadmill study)',f:'Cool white light improved treadmill exercise performance vs warm/dim; sex differences observed across colour conditions.',u:'https://www.ies.org/lda/research-optimizing-your-workout-environment-how-lighting-impacts-exercise/'},
-      {s:'PlatinumLED meta-review (Brazilian RCTs)',f:'Red light before exercise improved time-to-exhaustion, repetitions, and torque; delayed muscle fatigue onset significantly.',u:'https://platinumtherapylights.com/blogs/news/red-light-therapy-before-or-after-workout'},
-    ],
-    sensory:{scent:['Peppermint (improves run time & grip strength)','Eucalyptus (opens airways)','Avoid heavy fragrances during exertion'],sound:['130–150 BPM music for HIIT phases','Beat synchronisation improves endurance 15%+','Volume 70–80 dBSPL for motivation'],temp:['18–20°C ideal for HIIT performance','Active ventilation essential — CO₂ impairs decision-making','Cool air intake from below reduces heat stratification']},
-    recipe:{temp:'18–22°C',kelvin:'5000–6500K',lux:'600–800 lx',cri:'>80',palette:['#D32F2F','#F57C00','#FDD835','#212121']}
-  },
-  mindfulness:{
-    name:'Mindfulness & Meditation',icon:'🧘',temp:'22–25°C',lux:'30–100 lx',
-    kelvin:{label:'≤2700K',lo:1800,hi:2700},cri:'>80',
-    glow:'radial-gradient(ellipse at 50% -10%,rgba(90,110,150,0.35),transparent 70%)',
-    bulb:'rgba(200,162,112,0.6)',
-    objs:[{w:63,h:21},{w:34,h:63}],
-    palette:[{hex:'#E8DED2',name:'Soft Sand',role:'Background / ground'},{hex:'#A8B5A1',name:'Sage Green',role:'Balance / nature'},{hex:'#C1B7A9',name:'Warm Gray',role:'Stillness'},{hex:'#7B9E87',name:'Forest Mist',role:'Depth accent'}],
-    ev:`<strong>Warm, very dim light (≤2700K, 30–100 lx)</strong> minimises non-visual neural stimulation, allowing the default mode network to activate freely — the neural correlate of deep relaxation. The 2025 Buildings MDPI review ranks low CCT as the strongest single factor for circadian rest.<br><br>Earth and sage tones activate the <strong>autonomic nervous system's parasympathetic branch</strong>. The 2026 Chen & Pei RCT found low-saturation green/neutral environments reduced cortisol by 18.7%. A 2025 LEUKOS Flynn-method study found low luminance + warm CCT + indirect placement produced the most "relaxed" mood ratings of all tested configurations.`,
-    studies:[
-      {s:'Buildings · MDPI 2025',f:'Low CCT ranked #1 factor for circadian rest and relaxation; warm dim environments support melatonin-adjacent calm states.',u:'https://doaj.org/article/8f7699c2fffc4b9da005325734dc56dc'},
-      {s:'Chen & Pei 2026 (Oxford RCT)',f:'Neutral-green walls lowered salivary cortisol 18.7% and PSS-10 stress scores after 4-week exposure.',u:'https://academic.oup.com/schizophreniabulletin/article/52/Supplement_1/S64/8482418'},
-      {s:'LEUKOS 2025 (Flynn/mood prediction model)',f:'Low luminance + warm CCT + indirect placement produced most "relaxed" mood ratings in Flynn-method study.',u:'https://www.tandfonline.com/doi/full/10.1080/15502724.2025.2548450'},
-    ],
-    sensory:{scent:['Frankincense (deepens breathing, used in contemplative traditions)','Sandalwood (grounding, reduces cortisol)','Patchouli / cedarwood (earthy stillness)'],sound:['Tibetan singing bowls (theta entrainment)','Silence or binaural beats 4–8 Hz','Nature soundscape below 35 dBSPL'],temp:['22–24°C — warm enough for stillness comfort','Heated floor or mat for seated practice','No fan or ventilation noise during sessions']},
-    recipe:{temp:'22–25°C',kelvin:'1800–2700K',lux:'30–100 lx',cri:'>80',palette:['#E8DED2','#A8B5A1','#C1B7A9','#7B9E87']}
-  },
   reading:{
-    name:'Reading & Learning',icon:'📖',temp:'20–24°C',lux:'500–800 lx',
+    name:'Reading & Learning',icon:'📖',temp:'20–24°C',lux:'500–800 lx',category:'Cognitive',
     kelvin:{label:'4000K–5000K',lo:4000,hi:5000},cri:'>85',
-    glow:'radial-gradient(ellipse at 50% -10%,rgba(100,140,100,0.35),transparent 70%)',
-    bulb:'rgba(222,226,182,0.82)',
+    glow:'radial-gradient(ellipse at 50% -10%,rgba(100,140,100,.35),transparent 70%)',
+    bulb:'rgba(222,226,182,.82)',
     objs:[{w:53,h:93},{w:53,h:80},{w:53,h:68}],
     palette:[{hex:'#3E5C52',name:'Deep Teal',role:'Primary calm'},{hex:'#A0956B',name:'Warm Parchment',role:'Warmth balance'},{hex:'#F5F0E6',name:'Page Cream',role:'Background reference'},{hex:'#5C4A3D',name:'Library Brown',role:'Anchoring'}],
     ev:`<strong>Neutral daylight at 4000–5000K, 500–800 lx</strong> is the peer-reviewed consensus for reading. A 2025 Buildings MDPI paper (Shenyang Jianzhu University) confirmed <strong>4000K enhanced cognitive performance and visual comfort</strong>, with stronger benefits for female subjects. A 2022 ScienceDirect NIRS study found 500 lx at 5000K provides the best physiological balance — lowest fatigue on oxy-HB measures.<br><br>The <strong>500 lx threshold</strong> recurs across the literature: below it, concentration measurably declines; above 750–1000 lx, fatigue increases for sustained reading. Warm-toned library palettes create temporal stability and reduced urgency — supporting deep processing over task-oriented work.`,
@@ -392,10 +424,10 @@ const D={
     recipe:{temp:'20–24°C',kelvin:'4000–5000K',lux:'500–800 lx',cri:'>85',palette:['#3E5C52','#A0956B','#F5F0E6','#5C4A3D']}
   },
   creative:{
-    name:'Creative Work & Art',icon:'🎨',temp:'20–24°C',lux:'300–600 lx',
+    name:'Creative Work & Art',icon:'🎨',temp:'20–24°C',lux:'300–600 lx',category:'Cognitive',
     kelvin:{label:'3000K–4500K',lo:3000,hi:4500},cri:'>90',
-    glow:'radial-gradient(ellipse at 50% -10%,rgba(150,70,160,0.35),transparent 70%)',
-    bulb:'rgba(255,177,133,0.7)',
+    glow:'radial-gradient(ellipse at 50% -10%,rgba(150,70,160,.35),transparent 70%)',
+    bulb:'rgba(255,177,133,.7)',
     objs:[{w:63,h:93},{w:44,h:53},{w:34,h:43}],
     palette:[{hex:'#7B4F9E',name:'Creative Purple',role:'Imagination / primary'},{hex:'#E8A838',name:'Golden Warm',role:'Energy / warmth'},{hex:'#3D7A5E',name:'Studio Green',role:'Balance / ground'},{hex:'#F9F4ED',name:'Canvas Cream',role:'Working surface ref'}],
     ev:`<strong>Flexible warm-to-neutral light (3000–4500K, 300–600 lx)</strong> supports two distinct creative phases: divergent thinking (idea generation — warm 3000K is superior) and convergent execution (neutral 4000–4500K provides colour accuracy and alertness for precision).<br><br>University of British Columbia research found warm light produced <strong>23% more creative associations</strong> — correlating with parasympathetic relaxation releasing rigid categorical thinking. A 2024 Psi Chi study (Pepperdine) confirmed warm-colour environments produced the best creative scores. For visual art, <strong>CRI ≥90 is non-negotiable</strong> — below this, pigment colours shift measurably.`,
@@ -408,10 +440,10 @@ const D={
     recipe:{temp:'20–24°C',kelvin:'3000–4500K',lux:'300–600 lx',cri:'>90',palette:['#7B4F9E','#E8A838','#3D7A5E','#F9F4ED']}
   },
   video:{
-    name:'Video Calls & Presentations',icon:'📹',temp:'20–23°C',lux:'500–800 lx',
+    name:'Video Calls & Presentations',icon:'📹',temp:'20–23°C',lux:'500–800 lx',category:'Cognitive',
     kelvin:{label:'4000K–5500K',lo:4000,hi:5500},cri:'>90',
-    glow:'radial-gradient(ellipse at 50% -10%,rgba(30,120,200,0.35),transparent 70%)',
-    bulb:'rgba(180,212,255,0.82)',
+    glow:'radial-gradient(ellipse at 50% -10%,rgba(30,120,200,.35),transparent 70%)',
+    bulb:'rgba(180,212,255,.82)',
     objs:[{w:138,h:98},{w:39,h:54}],
     palette:[{hex:'#1A3A5C',name:'Professional Navy',role:'Background / authority'},{hex:'#4A7FA5',name:'Trust Blue',role:'Primary accent'},{hex:'#E8EDF2',name:'Clean Gray',role:'Neutral backdrop'},{hex:'#2E8B6A',name:'Credible Green',role:'Natural credibility'}],
     ev:`<strong>Neutral daylight at 4000–5500K, front-lighting the face</strong> maximises perceived credibility and professional impression. Research by Huang et al. (2022) confirmed that <strong>backlighting led to significantly more negative ratings</strong> in virtual interviews, while front-lit candidates were rated more competent and likeable.<br><br>A 2024 Frontiers in Psychology review found backgrounds with plants and books were rated highest for warmth and competence (Cook, Thompson & Ross, 2023). Yang et al. (2023) found nature-based virtual backgrounds produced <strong>higher perceived credibility</strong> than blank backgrounds. A LEUKOS 2024 personalized lighting study found subjects self-selected ~4300K at ~800 lux as their video call comfort optimum.`,
@@ -424,28 +456,43 @@ const D={
     sensory:{scent:['Neutral — avoid distracting focus','Light peppermint for pre-call alertness','Well-aired room for sustained speaking sessions'],sound:['Acoustic treatment to prevent echo and reverb','Microphone 15–30 cm from mouth, slightly below','Silence fans and aircon that cause on-mic noise'],temp:['20–22°C for still, extended sitting','Avoid heat from ring lights overheating the room','Stable temperature prevents visible flushing on camera']},
     recipe:{temp:'20–23°C',kelvin:'4000–5500K',lux:'500–800 lx',cri:'>90',palette:['#1A3A5C','#4A7FA5','#E8EDF2','#2E8B6A']}
   },
-  recovery:{
-    name:'Patient Recovery',icon:'🏥',temp:'20–24°C',lux:'300–1000 lx',
-    kelvin:{label:'Dynamic 2700K–6500K',lo:2700,hi:6500},cri:'>90',
-    glow:'radial-gradient(ellipse at 50% -10%,rgba(50,140,90,0.35),transparent 70%)',
-    bulb:'rgba(202,242,212,0.7)',
-    objs:[{w:158,h:44},{w:44,h:63},{w:29,h:29}],
-    palette:[{hex:'#2E8B6A',name:'Healing Green',role:'Calm / biophilic'},{hex:'#A8D5BA',name:'Serene Mint',role:'Restorative accent'},{hex:'#F0F8F4',name:'Clean White-Green',role:'Background / clarity'},{hex:'#5C8FA8',name:'Sky Blue',role:'Openness / airiness'}],
-    ev:`<strong>Dynamic lighting (warm 2700K in evening → bright 6500K in daytime)</strong> is the emerging evidence-based standard for healthcare recovery. A 2022 PMC Frontiers Public Health study of <strong>5,270 patients</strong> across Zhejiang University hospital wards found patients in high-daylight rooms had significantly shorter length of stay and lower healthcare costs.<br><br>The most-cited healthcare design study (Joseph, Center for Health Design, 2006) confirmed light reduces depression, decreases hospital stay length, improves sleep and circadian rhythm, and reduces pain perception. Walch et al. found patients on sunny hospital sides took <strong>22% less analgesic medication</strong> (p=.047) and experienced significantly less perceived stress (p=.035).`,
+  workout:{
+    name:'High-Intensity Workout',icon:'🏋️',temp:'18–22°C',lux:'600–800 lx',category:'Physical',
+    kelvin:{label:'5000K–6500K',lo:5000,hi:6500},cri:'>80',
+    glow:'radial-gradient(ellipse at 50% -10%,rgba(200,70,30,.45),transparent 70%)',
+    bulb:'rgba(255,152,52,.82)',
+    objs:[{w:53,h:83},{w:63,h:63},{w:53,h:83}],
+    palette:[{hex:'#D32F2F',name:'Energetic Red',role:'Activation / energy'},{hex:'#F57C00',name:'Vibrant Orange',role:'Drive / momentum'},{hex:'#FDD835',name:'Bright Yellow',role:'Visibility accent'},{hex:'#212121',name:'Stark Black',role:'Contrast / power'}],
+    ev:`<strong>Bright, cool light (5000–6500K, 600–800 lx)</strong> produces measurable performance gains. A landmark PLoS ONE study found men exposed to bright light (~4,420 lx) generated <strong>significantly more power per minute on cycle ergometry</strong> vs dim-light controls. Blue-enriched light suppresses melatonin, boosts cortisol and norepinephrine, and increases alertness.<br><br>An ASU / IES 2024 controlled gym study confirmed <strong>cool white light improved treadmill performance</strong> vs warm/dim alternatives. A Brazilian RCT meta-analysis found red light applied before exercise <strong>delays muscle fatigue onset and improves time-to-exhaustion</strong>. Temperature 18–22°C prevents performance degradation beginning above 26°C.`,
     studies:[
-      {s:'PMC · Frontiers Public Health 2022 (Zhejiang Univ.)',f:'5,270-patient study: high-daylight rooms produced significantly shorter hospital stay and measurably lower healthcare costs.',u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC8810491/'},
-      {s:'Center for Health Design (Joseph 2006)',f:'Light reduces depression, decreases hospital stay, improves sleep, lessens agitation in dementia patients, and reduces pain perception.',u:'https://www.healthdesign.org/chd/research/impact-light-outcomes-healthcare-settings'},
-      {s:'Walch et al. · Psychosomatic Medicine',f:'Sunny-side patients took 22% less analgesic medication per hour and experienced significantly less perceived stress (p=.035).',u:'https://www.commercialdesignindia.com/insights/healing-in-a-new-light-exploring-the-connection-between-hospital-design-and-patient-recovery'},
-      {s:'IEEE Biomedical Engineering Conf. 2023 (MDPI)',f:'Effective lighting design accelerates patient recovery speed and improves mental and physical health outcomes.',u:'https://www.mdpi.com/2673-4591/55/1/91'},
+      {s:'PMC · PLoS ONE (bright light & cycling)',f:'Bright light (4420 lx) produced significantly more cycling power than dim light; effect modulated by individual chronotype.',u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC3394763/'},
+      {s:'IES Research 2024 (ASU treadmill study)',f:'Cool white light improved treadmill exercise performance vs warm/dim; sex differences observed across colour conditions.',u:'https://www.ies.org/lda/research-optimizing-your-workout-environment-how-lighting-impacts-exercise/'},
+      {s:'PlatinumLED meta-review (Brazilian RCTs)',f:'Red light before exercise improved time-to-exhaustion, repetitions, and torque; delayed muscle fatigue onset significantly.',u:'https://platinumtherapylights.com/blogs/news/red-light-therapy-before-or-after-workout'},
     ],
-    sensory:{scent:['Lavender (anxiety reduction, most studied in clinical settings)','Bergamot (evidence-based for hospital anxiety)','Avoid strong clinical smells activating stress associations'],sound:['Nature sounds reduce pain perception and anxiety post-surgery','Keep ward noise below 45 dBSPL (WHO recommendation)','Live music therapy shows measurable cortisol reduction in ICU studies'],temp:['20–24°C with patient-adjustable control preferred','Patient-adjustable temperature reduces stress (Andrade & Devlin 2015)','Maintain humidity 40–60% for airway comfort']},
-    recipe:{temp:'20–24°C',kelvin:'2700K (eve) → 6500K (day)',lux:'300–1000 lx (dynamic)',cri:'>90',palette:['#2E8B6A','#A8D5BA','#F0F8F4','#5C8FA8']}
+    sensory:{scent:['Peppermint (improves run time & grip strength)','Eucalyptus (opens airways)','Avoid heavy fragrances during exertion'],sound:['130–150 BPM music for HIIT phases','Beat synchronisation improves endurance 15%+','Volume 70–80 dBSPL for motivation'],temp:['18–20°C ideal for HIIT performance','Active ventilation essential — CO₂ impairs decision-making','Cool air intake from below reduces heat stratification']},
+    recipe:{temp:'18–22°C',kelvin:'5000–6500K',lux:'600–800 lx',cri:'>80',palette:['#D32F2F','#F57C00','#FDD835','#212121']}
+  },
+  grooming:{
+    name:'Grooming & Makeup',icon:'💄',temp:'20–22°C',lux:'800–1200 lx',category:'Physical',
+    kelvin:{label:'4600K–6500K',lo:4600,hi:6500},cri:'≥95',
+    glow:'radial-gradient(ellipse at 50% -10%,rgba(200,210,230,.35),transparent 70%)',
+    bulb:'rgba(240,246,255,.92)',
+    objs:[{w:83,h:103},{w:44,h:44}],
+    palette:[{hex:'#F5E6E8',name:'Soft Pink',role:'Mirror surround'},{hex:'#F1F0E8',name:'Off-White',role:'Background neutral'},{hex:'#F8F9FA',name:'Clean White',role:'Task surface'},{hex:'#C8B8A2',name:'Warm Stone',role:'Grounding accent'}],
+    ev:`<strong>High CRI (≥95) at 4600–6500K, placed at face-level</strong> is the gold standard for grooming accuracy. At CRI 95+, skin undertones, blemishes, shadow gradients and cosmetic pigments render with near-perfect fidelity — critical for foundation matching and contour blending.<br><br>A 2022 ScienceDirect NIRS study confirmed that <strong>750 lx at 5000–6500K scores highest for workability and lowest physiological fatigue</strong> on oxy-HB measures — the sweet spot for precision tasks. Side-flanking or ring-mounted sources eliminate harsh facial shadows. Neutral walls prevent colour casts — a known source of grooming error in poorly designed bathrooms.`,
+    studies:[
+      {s:'ScienceDirect 2022 (NIRS physiological study)',f:'750 lx at 5000K–6500K scored best for workability and lowest fatigue/stress on NIRS oxy-HB physiological measure.',u:'https://www.sciencedirect.com/science/article/abs/pii/S0360132322010265'},
+      {s:'CIE / IES Colour Science Standards',f:'CRI ≥90–95 required for tasks demanding colour fidelity (cosmetic, medical, textile). Below 80 creates measurable colour discrimination errors.',u:'https://www.ies.org/lda/research-optimizing-your-workout-environment-how-lighting-impacts-exercise/'},
+      {s:'Energies MDPI 2022 (Chen, Tsai & Tsay)',f:'67-subject study: both illuminance and CCT significantly influence comfort, physiology and task performance accuracy.',u:'https://www.mdpi.com/1996-1073/15/12/4477'},
+    ],
+    sensory:{scent:['Neutral — avoid strong scents when selecting fragrances','Light citrus for morning energy','Stable humidity prevents product running'],sound:['Upbeat moderate-tempo music for routine steps','Podcasts or vocal audio for non-precision tasks','Quiet during precise application'],temp:['20–22°C — alert and precise','Control humidity 40–60%','No warm incandescent sources reflecting into mirror']},
+    recipe:{temp:'20–22°C',kelvin:'4600–6500K',lux:'800–1200 lx',cri:'≥95',palette:['#F5E6E8','#F1F0E8','#F8F9FA','#C8B8A2']}
   },
   children:{
-    name:"Children's Learning",icon:'🧒',temp:'20–23°C',lux:'300–500 lx',
+    name:"Children's Learning",icon:'🧒',temp:'20–23°C',lux:'300–500 lx',category:'Physical',
     kelvin:{label:'4000K–5000K',lo:4000,hi:5000},cri:'>85',
-    glow:'radial-gradient(ellipse at 50% -10%,rgba(240,160,40,0.35),transparent 70%)',
-    bulb:'rgba(255,222,122,0.78)',
+    glow:'radial-gradient(ellipse at 50% -10%,rgba(240,160,40,.35),transparent 70%)',
+    bulb:'rgba(255,222,122,.78)',
     objs:[{w:68,h:53},{w:68,h:58},{w:68,h:48}],
     palette:[{hex:'#F5A623',name:'Bright Amber',role:'Stimulating accent'},{hex:'#4CAF50',name:'Nature Green',role:'Calm / biophilic'},{hex:'#29B6F6',name:'Sky Blue',role:'Curiosity / openness'},{hex:'#FFF8E1',name:'Warm Cream',role:'Background / non-fatiguing'}],
     ev:`<strong>Neutral light at 4000–5000K, 300–500 lx</strong> is the evidence-based consensus for children's learning. A 2020 Sustainability MDPI classroom study confirmed <strong>4000–5000K is optimal for sustained attention and comfort</strong> in primary-age learners — neither too arousing (>5500K) nor too relaxing (3000K).<br><br>A 2021 IJERPH MDPI study found that colour diversity and classroom design measurably improve memory encoding, particularly for female students. Bright primary accent colours (amber, green, blue) are repeatedly linked to improved mood and learning motivation in school-age children. The WELL Building Standard v2 specifically recommends <strong>250 lx minimum at desk level</strong> and spectral tuning to reduce blue light in rest periods for children's educational environments.`,
@@ -458,53 +505,116 @@ const D={
     sensory:{scent:['Neutral — young children are more scent-sensitive','Mild citrus for morning activation periods','Avoid strong synthetic fragrances in enclosed spaces'],sound:['Keep below 35 dBSPL (ANSI classroom standard)','Short music breaks (5 min) between blocks improve retention','Low-volume pink/white noise benefits children with attention difficulties'],temp:['20–22°C — slightly warmer than adult offices','Consistent temperature reduces fidgeting and off-task behaviour','Adequate ventilation — CO₂ accumulates faster in rooms with many children']},
     recipe:{temp:'20–23°C',kelvin:'4000–5000K',lux:'300–500 lx',cri:'>85',palette:['#F5A623','#4CAF50','#29B6F6','#FFF8E1']}
   },
+  rest:{
+    name:'Rest & Wind-down',icon:'😌',temp:'16–20°C',lux:'30–100 lx',category:'Rest & Social',
+    kelvin:{label:'≤2700K',lo:1800,hi:2700},cri:'>80',
+    glow:'radial-gradient(ellipse at 50% -10%,rgba(180,90,30,.45),transparent 70%)',
+    bulb:'rgba(255,132,52,.72)',
+    objs:[{w:168,h:41},{w:44,h:54},{w:34,h:64}],
+    palette:[{hex:'#A8D5BA',name:'Serene Green',role:'Primary / calming'},{hex:'#F2E2BA',name:'Soft Sand',role:'Warmth / ground'},{hex:'#D1D1E9',name:'Gentle Lavender',role:'Soothing accent'},{hex:'#8D6E63',name:'Grounding Brown',role:'Stability'}],
+    ev:`<strong>Warm, dim light (≤2700K, 30–100 lx)</strong> is the most powerfully evidenced rest recommendation. An Indoor Air (Wiley) 2025 synthesis of 134 studies confirmed that evening blue light above 30–50 lux disrupts circadian timing — while amber tones preserve melatonin secretion and sleep onset.<br><br>A 2025 PMC study (Univ. Zaragoza, CEICA-approved) found <strong>red/warm light allows melatonin to rebound</strong> after 2–3 hours, contrasted with blue light which maintained suppression. Harvard research indicated warm-light groups fell asleep 19 minutes faster than cool-light controls.`,
+    studies:[
+      {s:'Indoor Air · Wiley 2025 (134-study synthesis)',f:'Moderate thermal environments 18–22°C support sleep; evening blue light >30–50 lux disrupts melatonin timing.',u:'https://onlinelibrary.wiley.com/doi/10.1155/ina/8245786'},
+      {s:'Life (Basel) · PMC 2025 (Univ. Zaragoza)',f:'Red/warm light allowed melatonin rebound after 2h; blue maintained suppression throughout night.',u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC12113466/'},
+      {s:'ScienceDirect 2024 (mixed warm LED nocturnal)',f:'Well-designed 2799K light improved sleep continuity and working memory vs 5798K.',u:'https://www.sciencedirect.com/science/article/abs/pii/S0360132324000635'},
+      {s:'Buildings · MDPI 2025',f:'Colour temperature ranked most influential factor for sleep quality; cycling to low-K in evening strongly recommended.',u:'https://doaj.org/article/8f7699c2fffc4b9da005325734dc56dc'},
+    ],
+    sensory:{scent:['Lavender (most studied sleep-promoting aroma)','Chamomile (anxiety reduction, replicated RCTs)','Valerian or sandalwood'],sound:['Pink noise or rain (~25% improved sleep onset)','Gentle binaural beats at delta/theta range','Keep below 40 dBSPL'],temp:['16–19°C optimal for sleep onset (core body cooling)','Weighted blankets compensate for cooler air','Blackout or very dim amber nightlight only']},
+    recipe:{temp:'16–20°C',kelvin:'1800–2700K',lux:'30–100 lx',cri:'>80',palette:['#A8D5BA','#F2E2BA','#D1D1E9','#8D6E63']}
+  },
+  mindfulness:{
+    name:'Mindfulness & Meditation',icon:'🧘',temp:'22–25°C',lux:'30–100 lx',category:'Rest & Social',
+    kelvin:{label:'≤2700K',lo:1800,hi:2700},cri:'>80',
+    glow:'radial-gradient(ellipse at 50% -10%,rgba(90,110,150,.35),transparent 70%)',
+    bulb:'rgba(200,162,112,.6)',
+    objs:[{w:63,h:21},{w:34,h:63}],
+    palette:[{hex:'#E8DED2',name:'Soft Sand',role:'Background / ground'},{hex:'#A8B5A1',name:'Sage Green',role:'Balance / nature'},{hex:'#C1B7A9',name:'Warm Gray',role:'Stillness'},{hex:'#7B9E87',name:'Forest Mist',role:'Depth accent'}],
+    ev:`<strong>Warm, very dim light (≤2700K, 30–100 lx)</strong> minimises non-visual neural stimulation, allowing the default mode network to activate freely — the neural correlate of deep relaxation. The 2025 Buildings MDPI review ranks low CCT as the strongest single factor for circadian rest.<br><br>Earth and sage tones activate the <strong>autonomic nervous system's parasympathetic branch</strong>. The 2026 Chen & Pei RCT found low-saturation green/neutral environments reduced cortisol by 18.7%. A 2025 LEUKOS Flynn-method study found low luminance + warm CCT + indirect placement produced the most "relaxed" mood ratings of all tested configurations.`,
+    studies:[
+      {s:'Buildings · MDPI 2025',f:'Low CCT ranked #1 factor for circadian rest and relaxation; warm dim environments support melatonin-adjacent calm states.',u:'https://doaj.org/article/8f7699c2fffc4b9da005325734dc56dc'},
+      {s:'Chen & Pei 2026 (Oxford RCT)',f:'Neutral-green walls lowered salivary cortisol 18.7% and PSS-10 stress scores after 4-week exposure.',u:'https://academic.oup.com/schizophreniabulletin/article/52/Supplement_1/S64/8482418'},
+      {s:'LEUKOS 2025 (Flynn/mood prediction model)',f:'Low luminance + warm CCT + indirect placement produced most "relaxed" mood ratings in Flynn-method study.',u:'https://www.tandfonline.com/doi/full/10.1080/15502724.2025.2548450'},
+    ],
+    sensory:{scent:['Frankincense (deepens breathing, used in contemplative traditions)','Sandalwood (grounding, reduces cortisol)','Patchouli / cedarwood (earthy stillness)'],sound:['Tibetan singing bowls (theta entrainment)','Silence or binaural beats 4–8 Hz','Nature soundscape below 35 dBSPL'],temp:['22–24°C — warm enough for stillness comfort','Heated floor or mat for seated practice','No fan or ventilation noise during sessions']},
+    recipe:{temp:'22–25°C',kelvin:'1800–2700K',lux:'30–100 lx',cri:'>80',palette:['#E8DED2','#A8B5A1','#C1B7A9','#7B9E87']}
+  },
+  recovery:{
+    name:'Patient Recovery',icon:'🏥',temp:'20–24°C',lux:'300–1000 lx',category:'Rest & Social',
+    kelvin:{label:'Dynamic 2700K–6500K',lo:2700,hi:6500},cri:'>90',
+    glow:'radial-gradient(ellipse at 50% -10%,rgba(50,140,90,.35),transparent 70%)',
+    bulb:'rgba(202,242,212,.7)',
+    objs:[{w:158,h:44},{w:44,h:63},{w:29,h:29}],
+    palette:[{hex:'#2E8B6A',name:'Healing Green',role:'Calm / biophilic'},{hex:'#A8D5BA',name:'Serene Mint',role:'Restorative accent'},{hex:'#F0F8F4',name:'Clean White-Green',role:'Background / clarity'},{hex:'#5C8FA8',name:'Sky Blue',role:'Openness / airiness'}],
+    ev:`<strong>Dynamic lighting (warm 2700K in evening → bright 6500K in daytime)</strong> is the emerging evidence-based standard for healthcare recovery. A 2022 PMC Frontiers Public Health study of <strong>5,270 patients</strong> across Zhejiang University hospital wards found patients in high-daylight rooms had significantly shorter length of stay and lower healthcare costs.<br><br>The most-cited healthcare design study (Joseph, Center for Health Design, 2006) confirmed light reduces depression, decreases hospital stay length, improves sleep and circadian rhythm, and reduces pain perception. Walch et al. found patients on sunny hospital sides took <strong>22% less analgesic medication</strong> (p=.047) and experienced significantly less perceived stress (p=.035).`,
+    studies:[
+      {s:'PMC · Frontiers Public Health 2022 (Zhejiang Univ.)',f:'5,270-patient study: high-daylight rooms produced significantly shorter hospital stay and measurably lower healthcare costs.',u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC8810491/'},
+      {s:'Center for Health Design (Joseph 2006)',f:'Light reduces depression, decreases hospital stay, improves sleep, lessens agitation in dementia patients, and reduces pain perception.',u:'https://www.healthdesign.org/chd/research/impact-light-outcomes-healthcare-settings'},
+      {s:'Walch et al. · Psychosomatic Medicine',f:'Sunny-side patients took 22% less analgesic medication per hour and experienced significantly less perceived stress (p=.035).',u:'https://www.commercialdesignindia.com/insights/healing-in-a-new-light-exploring-the-connection-between-hospital-design-and-patient-recovery'},
+      {s:'IEEE Biomedical Engineering Conf. 2023 (MDPI)',f:'Effective lighting design accelerates patient recovery speed and improves mental and physical health outcomes.',u:'https://www.mdpi.com/2673-4591/55/1/91'},
+    ],
+    sensory:{scent:['Lavender (anxiety reduction, most studied in clinical settings)','Bergamot (evidence-based for hospital anxiety)','Avoid strong clinical smells activating stress associations'],sound:['Nature sounds reduce pain perception and anxiety post-surgery','Keep ward noise below 45 dBSPL (WHO recommendation)','Live music therapy shows measurable cortisol reduction in ICU studies'],temp:['20–24°C with patient-adjustable control preferred','Patient-adjustable temperature reduces stress (Andrade & Devlin 2015)','Maintain humidity 40–60% for airway comfort']},
+    recipe:{temp:'20–24°C',kelvin:'2700K (eve) → 6500K (day)',lux:'300–1000 lx (dynamic)',cri:'>90',palette:['#2E8B6A','#A8D5BA','#F0F8F4','#5C8FA8']}
+  },
+  romance:{
+    name:'Romance & Intimacy',icon:'❤️',temp:'20–24°C',lux:'20–80 lx',category:'Rest & Social',
+    kelvin:{label:'1800K–2700K',lo:1800,hi:2700},cri:'>80',
+    glow:'radial-gradient(ellipse at 50% -10%,rgba(180,50,70,.45),transparent 70%)',
+    bulb:'rgba(255,92,72,.65)',
+    objs:[{w:163,h:41},{w:34,h:54}],
+    palette:[{hex:'#B71C1C',name:'Passionate Red',role:'Arousal accent'},{hex:'#4A235A',name:'Mysterious Purple',role:'Depth / sensuality'},{hex:'#F4A460',name:'Warm Candlelight',role:'Dominant ambience'},{hex:'#1a0a0a',name:'Deep Shadow',role:'Contrast / intimacy'}],
+    ev:`<strong>Very warm, dim light (1800–2700K, 20–80 lx)</strong> — matching candlelight quality — operates on two mechanisms. First, the warm spectrum avoids melanopsin activation. Second, low intensity activates the parasympathetic nervous system, lowering heart rate and perceived threat.<br><br>The 2025 PLoS ONE WSL study found <strong>subjective preference strongly favours warm light for intimate socialising</strong>, even where physiological data showed cool light reduces cortisol more — confirming perceived comfort dominates. A 2024 Psi Chi study (Pepperdine) found <strong>warm colour environments shifted mood most positively and reduced inhibition</strong> vs cool-colour conditions.`,
+    studies:[
+      {s:'PLoS ONE · Guenat et al. 2025 (WSL)',f:'Subjects strongly preferred warm light for intimate/relaxation contexts; subjective comfort dominated physiological stress differences.',u:'https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0327843'},
+      {s:'Psi Chi Journal 2024 (Pepperdine Univ.)',f:'Warm colour + warm light combination shifted mood most positively and reduced inhibitory affect vs cool conditions.',u:'https://cdn.ymaws.com/www.psichi.org/resource/resmgr/journal_2024/29_3_Journal_Afifi.pdf'},
+      {s:'PMC · Life 2025 (Zaragoza melatonin)',f:'Red/warm light allows melatonin rebound after 2h of evening exposure — alertness-then-ease cycle.',u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC12113466/'},
+    ],
+    sensory:{scent:['Rose absolute (desire & mood elevation)','Ylang-ylang (heart rate modulation)','Vanilla (comfort and pleasure association)'],sound:['Slow jazz at 50–60 dBSPL','Neo-soul / R&B without lyrics initially','Natural fireplace crackling'],temp:['20–22°C prevents drowsiness while staying comfortable','Use throws and textures for dynamic comfort','Avoid fans that break atmosphere']},
+    recipe:{temp:'20–24°C',kelvin:'1800–2700K',lux:'20–80 lx',cri:'>80',palette:['#B71C1C','#4A235A','#F4A460','#1a0a0a']}
+  },
+  dining:{
+    name:'Dining & Socialising',icon:'🍽️',temp:'20–24°C',lux:'150–300 lx',category:'Rest & Social',
+    kelvin:{label:'2700K–3000K',lo:2700,hi:3000},cri:'>90',
+    glow:'radial-gradient(ellipse at 50% -10%,rgba(210,145,50,.4),transparent 70%)',
+    bulb:'rgba(255,182,82,.82)',
+    objs:[{w:128,h:37},{w:44,h:54},{w:44,h:54}],
+    palette:[{hex:'#E07A5F',name:'Terracotta',role:'Primary / appetite'},{hex:'#B85C38',name:'Deep Rust',role:'Anchoring warmth'},{hex:'#D4A373',name:'Soft Gold',role:'Luminous accent'},{hex:'#FAF0E6',name:'Linen White',role:'Table / background'}],
+    ev:`<strong>2700K warm light at 150–300 lx</strong> consistently tops appetite research. A 2025 MDPI Foods study using GFER facial expression recognition found <strong>consumers showed the most positive emotions and highest appetite under 2700K warm white</strong> — blue light produced the highest "sad" emotion intensity.<br><br>Cornell Food & Brand Lab research showed dim settings were 2.5× more likely to produce dessert selection. Journal of Consumer Psychology found dim-light diners spent <strong>16% more time at table</strong> and were 5× more likely to dine in larger groups. High CRI (>90) ensures food renders accurately — dish-appearance clarity explained 87% of appetite variance (Leonardo et al., 2024).`,
+    studies:[
+      {s:'MDPI Foods 2025 (GFER facial expression)',f:'Highest appetite and positive emotion under 2700K; blue light produced strongest "sad" expression and lowest appetite.',u:'https://www.mdpi.com/2304-8158/14/19/3440'},
+      {s:'Cornell Food & Brand Lab',f:'Dim rooms: 2.5× more dessert selection. Well-lit rooms: 39% more salads, 30% more vegetables.',u:'https://www.superiorseating.com/blog/restaurant-hack-dim-lighting-appetite-effect'},
+      {s:'Journal of Consumer Psychology',f:'Dim-light diners spent 16% more time at table; 5× more likely to dine in larger groups.',u:'https://www.superiorseating.com/blog/restaurant-hack-dim-lighting-appetite-effect'},
+      {s:'Leonardo et al. 2024 (AKSEN, Indonesia)',f:'Neutral-warm CCT correlated with higher appetite scores; dish appearance clarity R²=87% of appetite variance.',u:'https://journal.uc.ac.id/index.php/AKSEN/article/view/4391'},
+    ],
+    sensory:{scent:['Warm bread/vanilla (comfort and appetite)','Citrus as aperitif signal','Avoid strong florals competing with food aromas'],sound:['Conversational jazz 55–65 dBSPL','Moderate tempo encourages longer stays','Live acoustic music improves perceived food quality 10–15%'],temp:['20–24°C comfortable for extended sitting','Avoid cold drafts near tables','Warm radiant floor heating ideal for lingering']},
+    recipe:{temp:'20–24°C',kelvin:'2700–3000K',lux:'150–300 lx',cri:'>90',palette:['#E07A5F','#B85C38','#D4A373','#FAF0E6']}
+  },
 };
 
-// ── RECIPE STORE ──
-const RS={};
+/* ─── STATE ─── */
+let mode='single', currentView='main', sel=[null,null], tabs={}, favs=new Set(), RS={};
 
-// ── STATE ──
-let mode='single', sel=[null,null], tabs={};
+/* ─── HELPERS ─── */
+function kPos(lo,hi){const MIN=1000,MAX=8000;return Math.min(97,Math.max(3,(((lo+hi)/2-MIN)/(MAX-MIN))*100));}
 
-// ── MOBILE SELECT ──
-const msEl=document.getElementById('mobSel');
-Object.entries(D).forEach(([k,d])=>{
-  const o=document.createElement('option');
-  o.value=k; o.textContent=d.icon+' '+d.name;
-  msEl.appendChild(o);
-});
-
-// ── KELVIN POSITION ──
-function kPos(lo,hi){
-  const MIN=1000,MAX=8000;
-  return Math.min(97,Math.max(3,(((lo+hi)/2-MIN)/(MAX-MIN))*100));
-}
-
-// ── BUILD VISUAL ──
 function vis(d,compact){
-  const h=compact?96:148;
   const objs=d.objs.map(o=>`<div class="hero-obj" style="width:${o.w}px;height:${o.h}px"></div>`).join('');
   const cls=compact?'mini-vis':'hero-vis';
   return `<div class="${cls}">
-    <div class="hero-glow" style="background:${d.glow};position:absolute;inset:0;"></div>
-    <div class="hero-bulb" style="background:${d.bulb};box-shadow:0 0 38px 16px ${d.bulb};position:absolute;top:13px;left:50%;transform:translateX(-50%);width:7px;height:7px;border-radius:50%;"></div>
+    <div style="background:${d.glow};position:absolute;inset:0;"></div>
+    <div style="background:${d.bulb};box-shadow:0 0 38px 16px ${d.bulb};position:absolute;top:13px;left:50%;transform:translateX(-50%);width:7px;height:7px;border-radius:50%;"></div>
     <div class="hero-floor"></div>
     <div class="hero-objs">${objs}</div>
     <div class="hero-fade"></div>
   </div>`;
 }
 
-// ── BUILD KELVIN ──
 function buildK(d){
   const pos=kPos(d.kelvin.lo,d.kelvin.hi);
   return `<div class="k-card">
     <div class="k-lbl">📡 Colour Temperature Spectrum</div>
     <div class="k-wrap">
       <div class="k-bar"></div>
-      <div class="k-mark" style="left:${pos}%">
-        <div class="k-lbl2">${d.kelvin.label}</div>
-        <div class="k-needle"></div>
-      </div>
+      <div class="k-mark" style="left:${pos}%"><div class="k-lbl2">${d.kelvin.label}</div><div class="k-needle"></div></div>
     </div>
     <div class="k-scale"><span>1000K · Candle</span><span>3000K · Warm</span><span>5000K · Daylight</span><span>8000K · Sky</span></div>
     <div class="k-stats">
@@ -516,148 +626,294 @@ function buildK(d){
   </div>`;
 }
 
-// ── BUILD EVIDENCE ──
 function buildEv(d){
   const cards=d.studies.map(s=>`<div class="sc"><div class="sc-src">${s.s}</div><div class="sc-find">${s.f}</div><a href="${s.u}" target="_blank" rel="noopener" class="sc-link">↗ View source</a></div>`).join('');
   return `<div class="card"><div class="c-label">Why it works · Evidence Summary</div><div class="ev">${d.ev}</div></div><div class="study-grid">${cards}</div>`;
 }
 
-// ── BUILD PALETTE ──
 function buildPal(d){
-  const sw=d.palette.map(c=>`<div class="sw" onclick="copyHex('${c.hex}')"><div class="sw-bg" style="background:${c.hex};"><div class="sw-cp">Copy HEX</div></div><div class="sw-info"><div class="sw-hex">${c.hex}</div><div class="sw-name">${c.name}</div><div class="sw-role">${c.role}</div></div></div>`).join('');
-  return `<div class="card"><div class="c-label">🎨 Colour Palette</div><p style="font-size:.83rem;color:var(--text-3);margin-bottom:1rem;line-height:1.6;">Click any swatch to copy its hex. Colours selected for evidence-linked psychological effects for this activity.</p><div class="pal-grid">${sw}</div></div>`;
+  const sw=d.palette.map(c=>`<div class="sw" onclick="copyHex('${c.hex}')"><div class="sw-bg" style="background:${c.hex};"><div class="sw-cp">Copy</div></div><div class="sw-info"><div class="sw-hex">${c.hex}</div><div class="sw-name">${c.name}</div><div class="sw-role">${c.role}</div></div></div>`).join('');
+  return `<div class="card"><div class="c-label">🎨 Colour Palette</div><p style="font-size:.82rem;color:var(--text-3);margin-bottom:1rem;line-height:1.6;">Tap any swatch to copy its hex code.</p><div class="pal-grid">${sw}</div></div>`;
 }
 
-// ── BUILD SENSORY ──
 function buildSen(d){
   const items=[{i:'🌸',t:'Scent',v:d.sensory.scent},{i:'🎵',t:'Sound',v:d.sensory.sound},{i:'🌡️',t:'Thermal',v:d.sensory.temp}];
   const cards=items.map(s=>`<div class="sc2"><div class="sc2-icon">${s.i}</div><div class="sc2-title">${s.t}</div><div class="sc2-items">${s.v.map(x=>`<div class="sc2-item">${x}</div>`).join('')}</div></div>`).join('');
-  return `<div class="card"><div class="c-label">🌿 Full Sensory Profile</div><p style="font-size:.83rem;color:var(--text-3);margin-bottom:1rem;line-height:1.6;">Scent, sound, and thermal environment compound the effects of lighting — all traced to environmental psychology research.</p><div class="sen-grid">${cards}</div></div>`;
+  return `<div class="card"><div class="c-label">🌿 Full Sensory Profile</div><p style="font-size:.82rem;color:var(--text-3);margin-bottom:1rem;line-height:1.6;">Scent, sound, and thermal environment compound the effects of lighting.</p><div class="sen-grid">${cards}</div></div>`;
 }
 
-// ── BUILD RECIPE ──
-function buildRec(key, d) {
-  const r = d.recipe;
-  const s = d.sensory;
-
-  // Menyusun teks format untuk dicopy ke clipboard (TIDAK DIRUBAH)
-  const thermalNotes = s.temp.map(t => `  - ${t}`).join('\n');
-  RS[key] = [
-    `ATMOSPHERE RECIPE — ${d.name}`,
-    '─'.repeat(32),
-    `Temperature : ${r.temp}`,
-    `Colour Temp : ${r.kelvin}`,
-    `Illuminance : ${r.lux}`,
-    `CRI         : ${r.cri}`,
-    `Palette     : ${r.palette.join(', ')}`,
-    `Thermal     :\n${thermalNotes}`,
-    '─'.repeat(32),
-    'Atlas of Atmosphere · evidence-based design'
-  ].join('\n');
-
-  const thermalText = s.temp.map(t => `· ${t}`).join('<br>');
-  const paletteText = r.palette.join(' &nbsp;·&nbsp; ');
-
-  return `<div class="recipe" style="padding: 1.2rem; display: flex; flex-direction: column; gap: 1rem;">
-    <div class="recipe-hdr" style="margin-bottom: 0;">
-      <div class="recipe-ttl">📋 Atmosphere Recipe</div>
-      <button class="copy-btn" onclick="copyRecipe('${key}')">Copy recipe</button>
-    </div>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start;">
+function buildRec(key,d){
+  const r=d.recipe,s=d.sensory;
+  const thermalNotes=s.temp.map(t=>`  - ${t}`).join('\n');
+  RS[key]=[`ATMOSPHERE RECIPE — ${d.name}`,'─'.repeat(32),`Temperature : ${r.temp}`,`Colour Temp : ${r.kelvin}`,`Illuminance : ${r.lux}`,`CRI         : ${r.cri}`,`Palette     : ${r.palette.join(', ')}`,`Thermal     :\n${thermalNotes}`,'─'.repeat(32),'Atlas of Atmosphere · evidence-based design'].join('\n');
+  const thermalText=s.temp.map(t=>`· ${t}`).join('<br>');
+  return `<div class="recipe">
+    <div class="recipe-hdr"><div class="recipe-ttl">📋 Atmosphere Recipe</div><button class="copy-btn" onclick="copyRecipe('${key}')">Copy</button></div>
+    <div class="recipe-grid">
       <div><div class="rf-l">Temperature</div><div class="rf-v">${r.temp}</div></div>
       <div><div class="rf-l">Colour Temp</div><div class="rf-v">${r.kelvin}</div></div>
       <div><div class="rf-l">Illuminance</div><div class="rf-v">${r.lux}</div></div>
       <div><div class="rf-l">CRI</div><div class="rf-v">${r.cri}</div></div>
-      <div><div class="rf-l">Palette HEX</div><div style="font-size: 0.9rem; color: #fff; font-family: 'DM Sans', sans-serif; margin-top: 0.15rem;">${paletteText}</div></div>
     </div>
-
-    <div style="height: 1px; background: rgba(255,255,255,0.08); width: 100%;"></div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-      <div>
-        <div class="rf-l">Thermal Details Optimal Point (The Sweet Spot)</div>
-        <div style="font-size: 0.8rem; color: var(--mist); font-family: 'DM Sans', sans-serif; line-height: 1.5;">${thermalText}</div>
-      </div>
-
-      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 0.7rem 1rem; border-radius: 6px;">
-        <div class="rf-l" style="color: var(--amber-light); margin-bottom: 0.3rem;">💡 The Science of Temperature</div>
-        <div style="font-size: 0.75rem; color: var(--mist); font-family: 'DM Sans', sans-serif; line-height: 1.4;">
-          The primary temperature in above is the <strong>Comfort Zone</strong>. The specific range in the thermal details is the <strong>Evidence-Based Sweet Spot</strong> proven to optimize physiological responses.
-        </div>
-      </div>
-    </div>
+    <div class="recipe-div"></div>
+    <div class="rf-l">Thermal Details Optimal Point (The Sweet Spot)</div>
+    <div class="recipe-thermal" style="margin-top:.4rem;">${thermalText}</div>
+    <div class="recipe-science"><div class="recipe-science-lbl">💡 Sweet Spot Note</div><div class="recipe-science-txt">The primary temperature above is the Comfort Zone. The thermal details above reflect the Evidence-Based Sweet Spot proven to optimise physiological responses.</div></div>
   </div>`;
 }
 
-// ── BUILD DETAIL ──
 function buildDetail(key,d){
   const t=tabs[key]||'ev';
   const tabs3=[{k:'ev',l:'📋 Evidence'},{k:'pal',l:'🎨 Palette'},{k:'sen',l:'🌿 Sensory'}];
   const tbtn=tabs3.map(x=>`<button class="tab ${t===x.k?'on':''}" onclick="switchTab('${key}','${x.k}')">${x.l}</button>`).join('');
+  const isFaved=favs.has(key);
   const p0=`<div class="${t==='ev'?'on':''}">${buildEv(d)}${buildK(d)}${buildRec(key,d)}</div>`;
   const p1=`<div class="${t==='pal'?'on':''}">${buildPal(d)}</div>`;
   const p2=`<div class="${t==='sen'?'on':''}">${buildSen(d)}${buildRec(key,d)}</div>`;
-  return `<div class="detail"><div class="hero">${vis(d,false)}<div class="hero-body"><div class="hero-name">${d.icon} ${d.name}</div><div class="hero-chips"><span class="hc hc-a">🌡️ ${d.temp}</span><span class="hc hc-a">💡 ${d.lux}</span><span class="hc hc-a">🔆 ${d.kelvin.label}</span><span class="hc hc-g">CRI ${d.cri}</span></div></div></div><div class="tabs">${tbtn}</div><div class="tpanels" id="tp-${key}">${p0}${p1}${p2}</div></div>`;
+  return `<div class="detail">
+    <div class="hero hero-header-rel">
+      ${vis(d,false)}
+      <button class="hero-fav ${isFaved?'active':''}" onclick="toggleFav('${key}',this)" title="${isFaved?'Remove from saved':'Save atmosphere'}">${isFaved?'♥':'♡'}</button>
+      <div class="hero-body">
+        <div class="hero-name">${d.icon} ${d.name}</div>
+        <div class="hero-chips"><span class="hc hc-a">🌡️ ${d.temp}</span><span class="hc hc-a">💡 ${d.lux}</span><span class="hc hc-a">🔆 ${d.kelvin.label}</span><span class="hc hc-g">CRI ${d.cri}</span></div>
+      </div>
+    </div>
+    <div class="tabs">${tbtn}</div>
+    <div class="tpanels" id="tp-${key}">${p0}${p1}${p2}</div>
+  </div>`;
 }
 
-// ── BUILD MINI ──
 function buildMini(key,d){
-  return `<div><div class="mini-hero">${vis(d,true)}<div class="mini-body"><div class="mini-name">${d.icon} ${d.name}</div><div class="mini-chips"><span class="mc">🌡️ ${d.temp}</span><span class="mc">🔆 ${d.kelvin.label}</span><span class="mc">💡 ${d.lux}</span></div></div></div>${buildK(d)}<div class="cmp-ev"><strong>Evidence:</strong> ${d.ev.replace(/<br><br>/g,' ').replace(/<[^>]+>/g,'').substring(0,340)}…</div>${buildPal(d)}</div>`;
+  return `<div>
+    <div class="mini-hero">${vis(d,true)}<div class="mini-body"><div class="mini-name">${d.icon} ${d.name}</div><div class="mini-chips"><span class="mc">🌡️ ${d.temp}</span><span class="mc">🔆 ${d.kelvin.label}</span><span class="mc">💡 ${d.lux}</span></div></div></div>
+    ${buildK(d)}
+    <div class="cmp-ev"><strong>Evidence:</strong> ${d.ev.replace(/<br><br>/g,' ').replace(/<[^>]+>/g,'').substring(0,340)}…</div>
+    ${buildPal(d)}
+  </div>`;
 }
 
-// ── RENDER ──
-function render(){
-  const eEl=document.getElementById('emptyEl'),sEl=document.getElementById('singleEl'),cEl=document.getElementById('compareEl');
-  if(mode==='single'){
-    cEl.style.display='none';
-    const k=sel[0];
-    if(!k){eEl.style.display='flex';sEl.style.display='none';}
-    else{eEl.style.display='none';sEl.style.display='block';sEl.innerHTML=buildDetail(k,D[k]);}
+/* ─── FAVOURITES ─── */
+function toggleFav(key,btn){
+  if(favs.has(key)){
+    favs.delete(key);
+    btn.classList.remove('active');
+    btn.textContent='♡';
+    toast('Removed from saved');
   }else{
-    eEl.style.display='none';sEl.style.display='none';cEl.style.display='block';
+    favs.add(key);
+    btn.classList.add('active');
+    btn.textContent='♥';
+    toast('Saved ♥');
+  }
+  updateFavCount();
+  syncSidebarFavs();
+}
+
+function updateFavCount(){
+  const n=favs.size;
+  const el=document.getElementById('favCount');
+  const pip=document.getElementById('bnFavPip');
+  el.textContent=n;
+  el.style.display=n>0?'flex':'none';
+  pip.style.display=n>0?'block':'none';
+  document.getElementById('favTopBtn').textContent=n>0?'♥':'♡';
+}
+
+function syncSidebarFavs(){
+  document.querySelectorAll('.act-btn').forEach(b=>{
+    const k=b.dataset.key;
+    b.classList.toggle('faved',favs.has(k));
+    const star=b.querySelector('.fav-star');
+    if(star) star.textContent=favs.has(k)?'♥':'♡';
+  });
+  document.querySelectorAll('.drawer-act-btn').forEach(b=>{
+    const k=b.dataset.key;
+    b.classList.toggle('faved',favs.has(k));
+    const star=b.querySelector('.fav-star');
+    if(star) star.textContent=favs.has(k)?'♥':'♡';
+  });
+}
+
+/* ─── VIEW MANAGEMENT ─── */
+function setView(v){
+  currentView=v;
+  const mainViews=['singleEl','compareEl','emptyEl','favsEl'];
+  mainViews.forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display='none'; });
+  updateBnActive();
+  if(v==='favs'){
+    renderFavs();
+    document.getElementById('favsEl').style.display='block';
+    document.getElementById('favTopBtn').classList.add('active');
+  }else{
+    document.getElementById('favTopBtn').classList.remove('active');
+    render();
+  }
+}
+
+function renderFavs(){
+  const grid=document.getElementById('favGrid');
+  if(favs.size===0){
+    grid.innerHTML=`<div class="fav-empty" style="grid-column:1/-1"><div class="fav-empty-icon">♡</div><div class="fav-empty-txt">No saved atmospheres yet.<br>Tap ♡ on any activity to save it.</div></div>`;
+    return;
+  }
+  grid.innerHTML=[...favs].map(key=>{
+    const d=D[key];
+    return `<div class="fav-card" onclick="openFavActivity('${key}')">
+      <div class="fav-card-vis">
+        ${vis(d,true)}
+        <div style="position:absolute;top:6px;right:8px;font-size:.85rem;">♥</div>
+      </div>
+      <div class="fav-card-body">
+        <div class="fav-card-name">${d.icon} ${d.name}</div>
+        <div class="fav-card-meta">${d.kelvin.label} · ${d.lux}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openFavActivity(key){
+  setMode('single');
+  selectActivity(key,0);
+  currentView='main';
+  updateBnActive();
+}
+
+function updateBnActive(){
+  document.querySelectorAll('.bn-btn').forEach(b=>b.classList.remove('active'));
+  if(currentView==='favs') document.getElementById('bn-favs').classList.add('active');
+  else if(mode==='compare') document.getElementById('bn-compare').classList.add('active');
+  else document.getElementById('bn-single').classList.add('active');
+}
+
+/* ─── DRAWER ─── */
+function openDrawer(){
+  document.getElementById('drawerOverlay').style.display='block';
+  requestAnimationFrame(()=>{
+    document.getElementById('drawerOverlay').classList.add('open');
+    document.getElementById('actDrawer').classList.add('open');
+  });
+  document.getElementById('searchInput').value='';
+  filterDrawer();
+  setTimeout(()=>document.getElementById('searchInput').focus(),350);
+}
+
+function closeDrawer(){
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.getElementById('actDrawer').classList.remove('open');
+  setTimeout(()=>document.getElementById('drawerOverlay').style.display='none',320);
+}
+
+function filterDrawer(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const body=document.getElementById('drawerBody');
+  const categories=['Cognitive','Physical','Rest & Social'];
+  let html='';
+  categories.forEach(cat=>{
+    const items=Object.entries(D).filter(([k,d])=>d.category===cat&&(q===''||d.name.toLowerCase().includes(q)||d.category.toLowerCase().includes(q)||d.kelvin.label.toLowerCase().includes(q)));
+    if(items.length===0) return;
+    html+=`<div class="drawer-section-label">${cat}</div>`;
+    items.forEach(([key,d])=>{
+      const isSel=sel[0]===key||(mode==='compare'&&sel[1]===key);
+      const isFv=favs.has(key);
+      html+=`<button class="drawer-act-btn ${isSel?'sel':''} ${isFv?'faved':''}" data-key="${key}" onclick="drawerSelectActivity('${key}')">
+        <span style="font-size:1.1rem;">${d.icon}</span>
+        <span>${d.name}</span>
+        <span class="dab-right"><span class="dab-badge">${d.category.split(' ')[0]}</span><span class="fav-star">${isFv?'♥':'♡'}</span></span>
+      </button>`;
+    });
+  });
+  if(html==='') html=`<div style="text-align:center;padding:2rem;color:var(--text-4);font-size:.87rem;">No activities match "${document.getElementById('searchInput').value}"</div>`;
+  body.innerHTML=html;
+}
+
+function drawerSelectActivity(key){
+  selectActivity(key,0);
+  closeDrawer();
+  if(currentView==='favs'){ currentView='main'; }
+  updateBnActive();
+}
+
+/* ─── BUILD SIDEBAR ─── */
+function buildSidebar(){
+  const sidebar=document.getElementById('desktopSidebar');
+  const categories=[
+    {label:'Cognitive',keys:['focused','reading','creative','collab','video']},
+    {label:'Physical',keys:['workout','grooming','children']},
+    {label:'Rest & Social',keys:['rest','mindfulness','recovery','romance','dining']},
+  ];
+  let html='';
+  categories.forEach((cat,ci)=>{
+    if(ci>0) html+=`<div class="s-div"></div>`;
+    html+=`<div class="s-label">${cat.label}</div>`;
+    cat.keys.forEach(key=>{
+      const d=D[key];
+      html+=`<button class="act-btn" data-key="${key}" onclick="selectActivity('${key}',0)">
+        <span class="act-icon">${d.icon}</span>${d.name}
+        <span class="act-badge">${d.category.split(' ')[0].toLowerCase()}</span>
+        <span class="fav-star">♡</span>
+      </button>`;
+    });
+  });
+  sidebar.innerHTML=html;
+}
+
+/* ─── RENDER ─── */
+function render(){
+  if(currentView==='favs') return;
+  const eEl=document.getElementById('emptyEl'),sEl=document.getElementById('singleEl'),cEl=document.getElementById('compareEl'),fEl=document.getElementById('favsEl');
+  eEl.style.display='none'; sEl.style.display='none'; cEl.style.display='none'; fEl.style.display='none';
+  if(mode==='single'){
+    const k=sel[0];
+    if(!k){eEl.style.display='flex';}
+    else{sEl.style.display='block';sEl.innerHTML=buildDetail(k,D[k]);}
+  }else{
+    cEl.style.display='block';
     const k0=sel[0],k1=sel[1];
-    const s0=k0?buildMini(k0,D[k0]):`<div class="cmp-prompt"><div class="cmp-num">①</div><p>Select first activity</p></div>`;
-    const s1=k1?buildMini(k1,D[k1]):`<div class="cmp-prompt"><div class="cmp-num">②</div><p>Select second activity</p></div>`;
+    const s0=k0?buildMini(k0,D[k0]):`<div class="cmp-prompt"><div class="cmp-num">①</div><p>Select first activity from Browse</p></div>`;
+    const s1=k1?buildMini(k1,D[k1]):`<div class="cmp-prompt"><div class="cmp-num">②</div><p>Select second activity from Browse</p></div>`;
     cEl.innerHTML=`<div class="cmp-grid"><div>${s0}</div><div>${s1}</div></div>`;
   }
 }
 
-// ── ACTIONS ──
+/* ─── ACTIONS ─── */
 function setMode(m){
   mode=m;
   document.getElementById('btnS').classList.toggle('active',m==='single');
   document.getElementById('btnC').classList.toggle('active',m==='compare');
   if(m==='compare') sel=[sel[0],null];
+  currentView='main';
+  updateBnActive();
   render();
 }
 
 function selectActivity(key,slot){
-  if(!key)return;
+  if(!key) return;
   if(mode==='single'){
     sel[0]=key;
     document.querySelectorAll('.act-btn').forEach(b=>b.classList.toggle('sel',b.dataset.key===key));
-    document.getElementById('mobSel').value=key;
   }else{
-    if(sel[0]===null||sel[1]!==null){sel=[key,null];}else{sel[1]=key;}
+    if(sel[0]===null||sel[1]!==null){ sel=[key,null]; }
+    else{ sel[1]=key; }
   }
   render();
 }
 
+function closeMobileMenus(){ closeDrawer(); }
+
 function switchTab(key,tab){
   tabs[key]=tab;
   const tp=document.getElementById('tp-'+key);
-  if(!tp)return;
+  if(!tp) return;
   const map={ev:0,pal:1,sen:2};
   const idx=map[tab];
   Array.from(tp.children).forEach((p,i)=>p.classList.toggle('on',i===idx));
-  const tBtns=tp.closest('.detail').querySelectorAll('.tab');
-  tBtns.forEach((b,i)=>b.classList.toggle('on',i===idx));
+  tp.closest('.detail').querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('on',i===idx));
   tp.children[idx].scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-function copyHex(hex){navigator.clipboard.writeText(hex).then(()=>toast(`${hex} copied`));}
-function copyRecipe(key){navigator.clipboard.writeText(RS[key]||'').then(()=>toast('Recipe copied'));}
+function copyHex(hex){ navigator.clipboard.writeText(hex).then(()=>toast(hex+' copied')); }
+function copyRecipe(key){ navigator.clipboard.writeText(RS[key]||'').then(()=>toast('Recipe copied!')); }
 
 let tt;
 function toast(msg){
@@ -667,6 +923,23 @@ function toast(msg){
   clearTimeout(tt);
   tt=setTimeout(()=>el.classList.remove('show'),2100);
 }
+
+/* ─── SWIPE TO CLOSE DRAWER ─── */
+(function(){
+  let startY=0,dragging=false;
+  const drawer=document.getElementById('actDrawer');
+  drawer.addEventListener('touchstart',e=>{startY=e.touches[0].clientY;dragging=true;},{passive:true});
+  drawer.addEventListener('touchmove',e=>{
+    if(!dragging) return;
+    const dy=e.touches[0].clientY-startY;
+    if(dy>60){ dragging=false; closeDrawer(); }
+  },{passive:true});
+  drawer.addEventListener('touchend',()=>{dragging=false;},{passive:true});
+})();
+
+/* ─── INIT ─── */
+buildSidebar();
+render();
 </script>
 </body>
 </html>
